@@ -30,6 +30,12 @@ public abstract class Person {
     }
 
     /**
+     * Default constructor for the Person class.
+     */
+    public Person() {
+    }
+
+    /**
      * Get the name of the person.
      * @return The name of the person.
      */

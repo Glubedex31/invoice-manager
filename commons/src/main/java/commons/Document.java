@@ -1,9 +1,17 @@
 package commons;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
 public class Document {
+
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
     private long id;
     private long number;
     private long series;
@@ -29,6 +37,12 @@ public class Document {
         this.date = date;
         this.client = client;
         this.provider = provider;
+    }
+
+    /**
+     * Default constructor for the Document class.
+     */
+    public Document() {
     }
 
     /**
