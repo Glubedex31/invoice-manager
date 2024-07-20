@@ -1,7 +1,10 @@
 package commons;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@MappedSuperclass
 public abstract class Person {
     private String name;
     private String address;

@@ -1,8 +1,6 @@
 package commons;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -17,7 +15,9 @@ public class Document {
     private long series;
     private long amount;
     private LocalDate date;
+    @ManyToOne
     private Client client;
+    @ManyToOne
     private Provider provider;
 
     /**
