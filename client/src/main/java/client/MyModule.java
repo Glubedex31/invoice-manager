@@ -2,6 +2,10 @@ package client;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.google.inject.Scopes;
+import scenes.MainCtrl;
+import utils.ClientUtils;
+import utils.ConfigUtils;
 //import com.google.inject.Scopes;
 
 public class MyModule implements Module {
@@ -13,12 +17,9 @@ public class MyModule implements Module {
      */
     @Override
     public void configure(Binder binder) {
-//        binder.bind(MainCtrl.class).in(Scopes.SINGLETON);
-//        binder.bind(AddExpenseCtrl.class).in(Scopes.SINGLETON);
-//
-//        binder.bind(ConfigReader.class).in(Scopes.SINGLETON);
-//        binder.bind(ClientUtils.class).in(Scopes.SINGLETON);
-//        binder.bind(UIUtils.class).in(Scopes.SINGLETON);
-//        binder.bind(WebSocketServerUtils.class).asEagerSingleton();
+        binder.bind(MainCtrl.class).in(Scopes.SINGLETON);
+
+        binder.bind(ConfigUtils.class).in(Scopes.SINGLETON);
+        binder.bind(ClientUtils.class).in(Scopes.SINGLETON);
     }
 }
