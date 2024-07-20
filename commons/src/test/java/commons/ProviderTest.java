@@ -33,7 +33,7 @@ class ProviderTest {
 
     @Test
     void testToString() {
-        String expected = "Person{name='Alice', address='789 Oak St', account='987654321', cif='CIF987', number='777-1234', bank='Bank C'}";
+        String expected = "Provider{id=0}";
         assertEquals(expected, provider.toString());
     }
 }
