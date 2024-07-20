@@ -12,6 +12,11 @@ import java.util.List;
 public class ClientController {
     private final ClientRepository clientRepository;
 
+    /**
+     * Constructor.
+     *
+     * @param clientRepository the client repository
+     */
     public ClientController(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
@@ -44,10 +49,12 @@ public class ClientController {
      * Edit a client.
      *
      * @param id the id of the client
+     * @param updatedClient the updated client
      * @return the new client
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Client> editClient(@PathVariable("id") long id, @RequestBody Client updatedClient) {
+    public ResponseEntity<Client> editClient(@PathVariable("id") long id,
+                                             @RequestBody Client updatedClient) {
         if (!clientRepository.existsById(id)) {
             return ResponseEntity.badRequest().build();
         }
@@ -90,13 +97,15 @@ public class ClientController {
      * Check if a client is null or has null fields.
      *
      * @param client the client to check
-     * @return true if the client is null or has null fields, false otherwise
+     * @return true if the client is null or has null fields,
+     * false otherwise
      */
     private boolean isNullOrEmptyClient(Client client) {
         //TODO: Revise this method when you know exactly what fields are optional
         return client == null || client.getName() == null || client.getAccount() == null
             || client.getAddress() == null || client.getBank() == null || client.getCif() == null
             || client.getName().isBlank() || client.getAccount().isBlank()
-            || client.getAddress().isBlank() || client.getBank().isBlank() || client.getCif().isBlank();
+            || client.getAddress().isBlank() || client.getBank().isBlank()
+            || client.getCif().isBlank();
     }
 }

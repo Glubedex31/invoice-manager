@@ -72,7 +72,8 @@ public class Payment {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (!(object instanceof Payment payment)) return false;
-        return number == payment.number && Objects.equals(meaning, payment.meaning) && id == payment.id;
+        return number == payment.number && Objects.equals(meaning, payment.meaning)
+            && id == payment.id;
     }
 
     /**

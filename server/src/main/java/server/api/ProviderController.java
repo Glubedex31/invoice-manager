@@ -49,6 +49,7 @@ public class ProviderController {
      * Edit a provider.
      *
      * @param id the id of the provider
+     * @param updatedProvider the updated provider
      * @return the new provider
      */
     @PutMapping("/{id}")
@@ -101,8 +102,10 @@ public class ProviderController {
     private static boolean isNullOrEmptyProvider(Provider provider) {
         //TODO: Revise this method when you know exactly what fields are optional
         return provider == null || provider.getName() == null || provider.getAccount() == null
-            || provider.getAddress() == null || provider.getBank() == null || provider.getCif() == null
+            || provider.getAddress() == null || provider.getBank() == null
+            || provider.getCif() == null
             || provider.getName().isBlank() || provider.getAccount().isBlank()
-            || provider.getAddress().isBlank() || provider.getBank().isBlank() || provider.getCif().isBlank();
+            || provider.getAddress().isBlank() || provider.getBank().isBlank()
+            || provider.getCif().isBlank();
     }
 }

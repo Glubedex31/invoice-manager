@@ -49,6 +49,7 @@ public class InvoiceController {
      * Edit an invoice.
      *
      * @param id the id of the invoice
+     * @param updatedInvoice the updated invoice
      * @return the new invoice
      */
     @PutMapping("/{id}")
