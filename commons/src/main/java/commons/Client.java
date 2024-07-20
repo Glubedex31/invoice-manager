@@ -1,6 +1,15 @@
 package commons;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Client extends Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     /**
@@ -15,6 +24,12 @@ public class Client extends Person {
     public Client(String name, String address, String account, String cif, String number,
                   String bank) {
         super(name, address, account, cif, number, bank);
+    }
+
+    /**
+     * Default constructor for the Client class.
+     */
+    public Client() {
     }
 
     /**

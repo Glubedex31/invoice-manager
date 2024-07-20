@@ -1,8 +1,17 @@
 package commons;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
+@Entity
 public class Payment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String meaning;
     private long number;
 
@@ -14,6 +23,12 @@ public class Payment {
     public Payment(String meaning, long number) {
         this.meaning = meaning;
         this.number = number;
+    }
+
+    /**
+     * Default constructor for the Payment class.
+     */
+    public Payment() {
     }
 
     /**
@@ -57,7 +72,8 @@ public class Payment {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (!(object instanceof Payment payment)) return false;
-        return number == payment.number && Objects.equals(meaning, payment.meaning);
+        return number == payment.number && Objects.equals(meaning, payment.meaning)
+            && id == payment.id;
     }
 
     /**
@@ -66,7 +82,7 @@ public class Payment {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(meaning, number);
+        return Objects.hash(meaning, number, id);
     }
 
     /**
@@ -78,6 +94,23 @@ public class Payment {
         return "Payment{" +
             "meaning='" + meaning + '\'' +
             ", number=" + number +
+            ", id=" + id +
             '}';
+    }
+
+    /**
+     * Get the id of the payment.
+     * @return The id of the payment.
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Set the id of the payment.
+     * @param id The id of the payment.
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 }

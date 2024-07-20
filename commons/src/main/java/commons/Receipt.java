@@ -1,9 +1,15 @@
 package commons;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
 public class Receipt extends Document{
+
+    @OneToOne
     private Invoice invoice;
 
     /**
@@ -20,6 +26,12 @@ public class Receipt extends Document{
                    Client client, Provider provider, Invoice invoice) {
         super(number, series, amount, date, client, provider);
         this.invoice = invoice;
+    }
+
+    /**
+     * Constructor for the Receipt class.
+     */
+    public Receipt() {
     }
 
     /**

@@ -1,8 +1,11 @@
 package commons;
 
+import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
 public class Invoice extends Document{
     private String meaning;
     private boolean hasBeenPaid;
@@ -23,6 +26,12 @@ public class Invoice extends Document{
         super(number, series, amount, date, client, provider);
         this.meaning = meaning;
         this.hasBeenPaid = hasBeenPaid;
+    }
+
+    /**
+     * Default constructor for the Invoice class.
+     */
+    public Invoice() {
     }
 
     /**
