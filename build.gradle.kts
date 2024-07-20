@@ -30,7 +30,3 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
-
-springBoot {
-	mainClass.set("server.Main")
-}

@@ -1,11 +1,16 @@
 plugins {
     id("java")
+    id("application")
 }
 
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
+}
+
+application {
+    mainClass.set("server.Main")
 }
 
 group = "server"
