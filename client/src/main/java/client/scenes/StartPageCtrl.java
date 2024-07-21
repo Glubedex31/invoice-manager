@@ -3,6 +3,7 @@ package client.scenes;
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import client.utils.ClientUtils;
@@ -65,14 +66,22 @@ public class StartPageCtrl implements Initializable {
      * Handle the expenses.
      */
     public void handleExpenses() {
-
+        if(serverUtils.getProviders().isEmpty()) {
+            showProfileError();
+        } else {
+            //mainCtrl.showExpensesPage();
+        }
     }
 
     /**
      * Handle the income.
      */
     public void handleIncome() {
-
+        if(serverUtils.getProviders().isEmpty()) {
+            showProfileError();
+        } else {
+            mainCtrl.showIncomeMenuPage();
+        }
     }
 
     /**
@@ -86,7 +95,11 @@ public class StartPageCtrl implements Initializable {
      * Handle the register.
      */
     public void handleRegister() {
-
+        if(serverUtils.getProviders().isEmpty()) {
+            showProfileError();
+        } else {
+            //mainCtrl.showRegisterPage();
+        }
     }
 
     /**
@@ -100,5 +113,17 @@ public class StartPageCtrl implements Initializable {
         incomeButton.setText(map.get("start_page_income"));
         settingsButton.setText(map.get("start_page_settings"));
         registerButton.setText(map.get("start_page_register"));
+    }
+
+    /**
+     * Show the profile error.
+     */
+    private void showProfileError() {
+        Map<String, String> map = clientUtils.getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(map.get("no_profile_error"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("no_profile_error_text"));
+        alert.showAndWait();
     }
 }

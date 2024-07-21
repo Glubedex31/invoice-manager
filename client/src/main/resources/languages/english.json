@@ -5,6 +5,9 @@
   "start_page_settings": "Settings",
   "start_page_register": "Register",
 
+  "no_profile_error": "No profile found",
+  "no_profile_error_text": "No profile found. Please configure your profile via Settings.",
+
   "settings_title": "Settings",
   "settings_save": "Save",
   "settings_back": "Back",
@@ -23,5 +26,13 @@
   "settings_server_error": "Server error",
   "settings_server_error_text": "An error occurred while trying to save the provider. Please try again later.",
   "settings_success": "Success",
-  "settings_success_text": "Provider saved successfully."
+  "settings_success_text": "Provider saved successfully.",
+
+  "income_menu": "Income Menu",
+  "create_invoice": "Create Invoice",
+  "invoice_summary": "Invoice Summary",
+  "create_receipt": "Create Receipt",
+  "receipt_summary": "Receipt Summary",
+  "create_bank": "Create Bank St.",
+  "bank_summary": "Bank St. Summary"
 }

@@ -14,6 +14,8 @@ public class MainCtrl {
     private Scene startPage;
     private SettingsPageCtrl settingsPageCtrl;
     private Scene settingsPage;
+    private IncomeMenuPageCtrl incomeMenuPageCtrl;
+    private Scene incomeMenuPage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -27,7 +29,8 @@ public class MainCtrl {
      */
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
-                           Pair<SettingsPageCtrl, Parent> settingsPage) {
+                           Pair<SettingsPageCtrl, Parent> settingsPage,
+                           Pair<IncomeMenuPageCtrl, Parent> incomeMenuPage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -35,6 +38,9 @@ public class MainCtrl {
 
         this.settingsPageCtrl = settingsPage.getKey();
         this.settingsPage = new Scene(settingsPage.getValue());
+
+        this.incomeMenuPageCtrl = incomeMenuPage.getKey();
+        this.incomeMenuPage = new Scene(incomeMenuPage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -67,5 +73,14 @@ public class MainCtrl {
         primaryStage.setTitle("Settings Page");
         primaryStage.setScene(settingsPage);
         settingsPageCtrl.refresh();
+    }
+
+    /**
+     * Show the income menu page.
+     */
+    public void showIncomeMenuPage() {
+        primaryStage.setTitle("Income Menu Page");
+        primaryStage.setScene(incomeMenuPage);
+        incomeMenuPageCtrl.refresh();
     }
 }

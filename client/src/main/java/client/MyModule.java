@@ -1,5 +1,6 @@
 package client;
 
+import client.scenes.IncomeMenuPageCtrl;
 import client.scenes.SettingsPageCtrl;
 import client.scenes.StartPageCtrl;
 import com.google.inject.Binder;
@@ -22,6 +23,7 @@ public class MyModule implements Module {
         binder.bind(MainCtrl.class).in(Scopes.SINGLETON);
         binder.bind(SettingsPageCtrl.class).in(Scopes.SINGLETON);
         binder.bind(StartPageCtrl.class).in(Scopes.SINGLETON);
+        binder.bind(IncomeMenuPageCtrl.class).in(Scopes.SINGLETON);
 
         binder.bind(ConfigUtils.class).in(Scopes.SINGLETON);
         binder.bind(ClientUtils.class).in(Scopes.SINGLETON);

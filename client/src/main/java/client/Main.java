@@ -1,5 +1,6 @@
 package client;
 
+import client.scenes.IncomeMenuPageCtrl;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import javafx.application.Application;
@@ -56,11 +57,13 @@ public class Main extends Application {
         configUtils.initialize();
         var startPage = FXML.load(StartPageCtrl.class, "scenes", "StartPage.fxml");
         var settingsPage = FXML.load(SettingsPageCtrl.class, "scenes", "SettingsPage.fxml");
+        var incomeMenuPage = FXML.load(IncomeMenuPageCtrl.class, "scenes", "IncomeMenuPage.fxml");
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage,
             startPage,
-            settingsPage);
+            settingsPage,
+            incomeMenuPage);
 
         primaryStage.setOnCloseRequest(e -> {
             configUtils.writeLanguage(clientUtils.getLanguage());

@@ -117,6 +117,9 @@ public class SettingsPageCtrl implements Initializable {
         languageComboBox.setPromptText(map.get("settings_language_box"));
     }
 
+    /**
+     * Handles the save button.
+     */
     public void handleSave() {
         if(isBlankOrInvalid()) {
             showError();
@@ -157,6 +160,9 @@ public class SettingsPageCtrl implements Initializable {
         }
     }
 
+    /**
+     * Shows a success message.
+     */
     private void showSuccess() {
         Map<String, String> map = clientUtils.getLanguageMap();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -166,6 +172,9 @@ public class SettingsPageCtrl implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Shows an error message.
+     */
     private void showError() {
         Map<String, String> map = clientUtils.getLanguageMap();
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -175,6 +184,9 @@ public class SettingsPageCtrl implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Shows a server error message.
+     */
     private void showServerError() {
         Map<String, String> map = clientUtils.getLanguageMap();
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -184,6 +196,10 @@ public class SettingsPageCtrl implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Checks if the fields are blank or invalid.
+     * @return True if the fields are blank or invalid, false otherwise
+     */
     public boolean isBlankOrInvalid() {
         return nameField.getText().isBlank() || cifField.getText().isBlank() ||
             addressField.getText().isBlank() || accountField.getText().isBlank() ||
@@ -193,6 +209,9 @@ public class SettingsPageCtrl implements Initializable {
             bankField.getText().length() > 100 || numberField.getText().length() > 100;
     }
 
+    /**
+     * Handles the back button.
+     */
     public void handleBack() {
         mainCtrl.showStartPage();
     }

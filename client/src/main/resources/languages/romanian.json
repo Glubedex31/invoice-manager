@@ -5,6 +5,9 @@
   "start_page_settings": "Setari",
   "start_page_register": "Registru",
 
+  "no_profile_error": "Niciun profil gasit",
+  "no_profile_error_text": "Niciun profil gasit. Va rugam sa configurati profilul dvs. din Setari.",
+
   "settings_title": "Setari",
   "settings_save": "Salveaza",
   "settings_back": "Inapoi",
@@ -23,5 +26,13 @@
   "settings_server_error": "Eroare de server",
   "settings_server_error_text": "A aparut o eroare in timpul incercarii de a salva furnizorul. Va rugam sa incercati mai tarziu.",
   "settings_success": "Succes",
-  "settings_success_text": "Furnizorul a fost salvat cu succes."
+  "settings_success_text": "Furnizorul a fost salvat cu succes.",
+
+  "income_menu": "Meniu venit",
+  "create_invoice": "Creeaza factura",
+  "invoice_summary": "Rezumat facturi",
+  "create_receipt": "Creeaza chitanta",
+  "receipt_summary": "Rezumat chitante",
+  "create_bank": "Creeaza extras de cont",
+  "bank_summary": "Rezumat extrase de cont"
 }
