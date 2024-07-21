@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.IncomeMenuPageCtrl">
+   <children>
+      <Text fx:id="title" layoutX="212.0" layoutY="75.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Income Menu" textAlignment="CENTER" wrappingWidth="195.3853759765625" />
+      <Button fx:id="backButton" layoutX="33.0" layoutY="34.0" mnemonicParsing="false" text="Back" onAction="#handleBack"/>
+      <Button fx:id="createInvoiceButton" layoutX="60.0" layoutY="110.0" onAction="#handleCreateInvoice" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Create Invoice" />
+      <Button fx:id="invoiceSummaryButton" layoutX="235.0" layoutY="110.0" onAction="#handleInvoiceSummary" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Invoice Summary" />
+      <Button fx:id="createReceiptButton" layoutX="410.0" layoutY="110.0" onAction="#handleCreateReceipt" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Create Receipt" />
+      <Button fx:id="receiptSummaryButton" layoutX="60.0" layoutY="170.0" onAction="#handleReceiptSummary" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Receipt Summary" />
+      <Button fx:id="createBankButton" layoutX="235.0" layoutY="170.0" onAction="#handleCreateBank" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Create Bank St." />
+      <Button fx:id="bankSummaryButton" layoutX="410.0" layoutY="170.0" onAction="#handleBankSummary" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Bank St. Summary" />
+   </children>
+</AnchorPane>

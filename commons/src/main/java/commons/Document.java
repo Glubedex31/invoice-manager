@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Document {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long number;
     private long series;

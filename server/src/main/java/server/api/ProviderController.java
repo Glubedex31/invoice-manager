@@ -53,7 +53,7 @@ public class ProviderController {
      * @return the new provider
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Provider> editProvider(@PathVariable long id,
+    public ResponseEntity<Provider> editProvider(@PathVariable("id") long id,
                                                  @RequestBody Provider updatedProvider) {
         if (!providerRepository.existsById(id) || isNullOrEmptyProvider(updatedProvider)) {
             return ResponseEntity.badRequest().build();

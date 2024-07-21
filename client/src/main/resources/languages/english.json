@@ -1,0 +1,38 @@
+{
+  "start_page_title": "Start Page",
+  "start_page_income": "Income",
+  "start_page_expenses": "Expenses",
+  "start_page_settings": "Settings",
+  "start_page_register": "Register",
+
+  "no_profile_error": "No profile found",
+  "no_profile_error_text": "No profile found. Please configure your profile via Settings.",
+
+  "settings_title": "Settings",
+  "settings_save": "Save",
+  "settings_back": "Back",
+  "settings_language": "Language",
+  "settings_configure": "Configure your profile",
+  "settings_name": "Name",
+  "settings_cif": "CIF",
+  "settings_address": "Address",
+  "settings_account": "Account",
+  "settings_bank": "Bank",
+  "settings_number": "Number",
+  "settings_language_box": "Choose your language",
+
+  "validation_error": "Validation error",
+  "validation_error_text": "Please fill in all the fields. Fields are either blank or too long.",
+  "settings_server_error": "Server error",
+  "settings_server_error_text": "An error occurred while trying to save the provider. Please try again later.",
+  "settings_success": "Success",
+  "settings_success_text": "Provider saved successfully.",
+
+  "income_menu": "Income Menu",
+  "create_invoice": "Create Invoice",
+  "invoice_summary": "Invoice Summary",
+  "create_receipt": "Create Receipt",
+  "receipt_summary": "Receipt Summary",
+  "create_bank": "Create Bank St.",
+  "bank_summary": "Bank St. Summary"
+}
