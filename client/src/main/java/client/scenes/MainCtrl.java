@@ -1,12 +1,12 @@
-package scenes;
+package client.scenes;
 
 import com.google.inject.Inject;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import utils.ClientUtils;
-import utils.ConfigUtils;
+import client.utils.ClientUtils;
+import client.utils.ConfigUtils;
 
 public class MainCtrl {
     private Stage primaryStage;

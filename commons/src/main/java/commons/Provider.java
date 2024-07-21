@@ -1,6 +1,7 @@
 package commons;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
@@ -9,6 +10,7 @@ import java.util.Objects;
 public class Provider extends Person {
 
     @Id
+    @GeneratedValue(generator = "increment")
     private long id;
 
     /**

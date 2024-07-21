@@ -1,12 +1,12 @@
-package scenes;
+package client.scenes;
 
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import utils.ClientUtils;
-import utils.ServerUtils;
+import client.utils.ClientUtils;
+import client.utils.ServerUtils;
 
 import java.net.URL;
 import java.util.Map;

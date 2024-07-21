@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import scenes.MainCtrl;
-import scenes.SettingsPageCtrl;
-import scenes.StartPageCtrl;
-import utils.ClientUtils;
-import utils.ConfigUtils;
+import client.scenes.MainCtrl;
+import client.scenes.SettingsPageCtrl;
+import client.scenes.StartPageCtrl;
+import client.utils.ClientUtils;
+import client.utils.ConfigUtils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

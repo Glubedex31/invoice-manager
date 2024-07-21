@@ -1,11 +1,13 @@
 package client;
 
+import client.scenes.SettingsPageCtrl;
+import client.scenes.StartPageCtrl;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Scopes;
-import scenes.MainCtrl;
-import utils.ClientUtils;
-import utils.ConfigUtils;
+import client.scenes.MainCtrl;
+import client.utils.ClientUtils;
+import client.utils.ConfigUtils;
 //import com.google.inject.Scopes;
 
 public class MyModule implements Module {
@@ -18,6 +20,8 @@ public class MyModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(MainCtrl.class).in(Scopes.SINGLETON);
+        binder.bind(SettingsPageCtrl.class).in(Scopes.SINGLETON);
+        binder.bind(StartPageCtrl.class).in(Scopes.SINGLETON);
 
         binder.bind(ConfigUtils.class).in(Scopes.SINGLETON);
         binder.bind(ClientUtils.class).in(Scopes.SINGLETON);

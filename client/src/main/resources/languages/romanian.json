@@ -16,5 +16,12 @@
   "settings_account": "Cont",
   "settings_bank": "Banca",
   "settings_number": "Numar",
-  "settings_language_box": "Alege limba"
+  "settings_language_box": "Alege limba",
+
+  "validation_error": "Eroare de validare",
+  "validation_error_text": "Va rugam sa completati toate campurile. Campurile sunt fie goale, fie prea lungi.",
+  "settings_server_error": "Eroare de server",
+  "settings_server_error_text": "A aparut o eroare in timpul incercarii de a salva furnizorul. Va rugam sa incercati mai tarziu.",
+  "settings_success": "Succes",
+  "settings_success_text": "Furnizorul a fost salvat cu succes."
 }

@@ -16,5 +16,12 @@
   "settings_account": "Account",
   "settings_bank": "Bank",
   "settings_number": "Number",
-  "settings_language_box": "Choose your language"
+  "settings_language_box": "Choose your language",
+
+  "validation_error": "Validation error",
+  "validation_error_text": "Please fill in all the fields. Fields are either blank or too long.",
+  "settings_server_error": "Server error",
+  "settings_server_error_text": "An error occurred while trying to save the provider. Please try again later.",
+  "settings_success": "Success",
+  "settings_success_text": "Provider saved successfully."
 }

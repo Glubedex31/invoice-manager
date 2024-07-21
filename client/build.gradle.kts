@@ -32,11 +32,13 @@ repositories {
 
 dependencies {
     implementation("jakarta.ws.rs:jakarta.ws.rs-api:3.1.0")
-    implementation("org.glassfish.jersey.core:jersey-client:3.0.2")
+    implementation("org.glassfish.jersey.core:jersey-client:3.0.3")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
     implementation("org.springframework.boot:spring-boot-autoconfigure:3.3.1")
 
     implementation("com.google.inject:guice:7.0.0")
+    implementation("org.glassfish.jersey.inject:jersey-hk2:3.0.2")
+    implementation("org.glassfish.jersey.media:jersey-media-json-jackson:3.0.3")
     implementation("org.openjfx:javafx-controls:21.0.2")
     implementation("org.openjfx:javafx-fxml:21.0.2")
 
