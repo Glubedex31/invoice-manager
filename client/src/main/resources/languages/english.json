@@ -1,7 +1,20 @@
 {
   "start_page_title": "Start Page",
-  "income": "Income",
-  "expenses": "Expenses",
-  "settings": "Settings",
-  "register": "Register"
+  "start_page_income": "Income",
+  "start_page_expenses": "Expenses",
+  "start_page_settings": "Settings",
+  "start_page_register": "Register",
+
+  "settings_title": "Settings",
+  "settings_save": "Save",
+  "settings_back": "Back",
+  "settings_language": "Language",
+  "settings_configure": "Configure your profile",
+  "settings_name": "Name",
+  "settings_cif": "CIF",
+  "settings_address": "Address",
+  "settings_account": "Account",
+  "settings_bank": "Bank",
+  "settings_number": "Number",
+  "settings_language_box": "Choose your language"
 }

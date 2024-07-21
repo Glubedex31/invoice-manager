@@ -23,7 +23,8 @@ public class MainCtrl {
      * Constructor for the main controller.
      * @param primaryStage The primary stage
      * @param startPage The start page
-     **/
+     * @param settingsPage The settings page
+     */
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
                            Pair<SettingsPageCtrl, Parent> settingsPage) {

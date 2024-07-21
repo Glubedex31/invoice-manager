@@ -1,7 +1,20 @@
 {
   "start_page_title": "Pagina de start",
-  "income": "Venit",
-  "expenses": "Cheltuieli",
-  "settings": "Setari",
-  "register": "Registru"
+  "start_page_income": "Venit",
+  "start_page_expenses": "Cheltuieli",
+  "start_page_settings": "Setari",
+  "start_page_register": "Registru",
+
+  "settings_title": "Setari",
+  "settings_save": "Salveaza",
+  "settings_back": "Inapoi",
+  "settings_language": "Limba",
+  "settings_configure": "Configureaza-ti profilul",
+  "settings_name": "Nume",
+  "settings_cif": "CIF",
+  "settings_address": "Adresa",
+  "settings_account": "Cont",
+  "settings_bank": "Banca",
+  "settings_number": "Numar",
+  "settings_language_box": "Alege limba"
 }
