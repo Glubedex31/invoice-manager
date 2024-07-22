@@ -53,5 +53,9 @@
   "client_bank": "Banca client",
   "client_number": "Numar client",
   "digits_error": "Eroare cifre",
-  "digits_error_text": "Va rugam sa introduceti un numar valid pentru suma, numar si serie."
+  "digits_error_text": "Va rugam sa introduceti un numar valid pentru suma, numar si serie.",
+
+  "preview_save_receipt": "Salveaza + Chitanta",
+  "preview_delete": "Sterge",
+  "preview_edit": "Editeaza"
 }

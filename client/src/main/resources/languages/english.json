@@ -53,6 +53,9 @@
   "client_bank": "Client Bank",
   "client_number": "Client Number",
   "digits_error": "Digits error",
-  "digits_error_text": "Please enter a valid number for the amount, number and series."
+  "digits_error_text": "Please enter a valid number for the amount, number and series.",
 
+  "preview_save_receipt": "Save + Receipt",
+  "preview_delete": "Delete",
+  "preview_edit": "Edit"
 }

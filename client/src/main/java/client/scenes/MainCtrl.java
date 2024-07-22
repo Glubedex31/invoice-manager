@@ -1,6 +1,7 @@
 package client.scenes;
 
 import com.google.inject.Inject;
+import commons.Invoice;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ public class MainCtrl {
     private Scene incomeMenuPage;
     private NewInvoicePageCtrl newInvoicePageCtrl;
     private Scene newInvoicePage;
+    private PreviewInvoicePageCtrl previewInvoicePageCtrl;
+    private Scene previewInvoicePage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -28,12 +31,16 @@ public class MainCtrl {
      * @param primaryStage The primary stage
      * @param startPage The start page
      * @param settingsPage The settings page
+     * @param incomeMenuPage The income menu page
+     * @param newInvoicePage The new invoice page
+     * @param previewInvoicePage The preview invoice page
      */
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
                            Pair<SettingsPageCtrl, Parent> settingsPage,
                            Pair<IncomeMenuPageCtrl, Parent> incomeMenuPage,
-                           Pair<NewInvoicePageCtrl, Parent> newInvoicePage) {
+                           Pair<NewInvoicePageCtrl, Parent> newInvoicePage,
+                           Pair<PreviewInvoicePageCtrl, Parent> previewInvoicePage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -47,6 +54,9 @@ public class MainCtrl {
 
         this.newInvoicePageCtrl = newInvoicePage.getKey();
         this.newInvoicePage = new Scene(newInvoicePage.getValue());
+
+        this.previewInvoicePageCtrl = previewInvoicePage.getKey();
+        this.previewInvoicePage = new Scene(previewInvoicePage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -97,5 +107,16 @@ public class MainCtrl {
         primaryStage.setTitle("New Invoice Page");
         primaryStage.setScene(newInvoicePage);
         newInvoicePageCtrl.refresh();
+    }
+
+    /**
+     * Show the preview invoice page.
+     * @param invoice The invoice to preview
+     */
+    public void showPreviewInvoicePage(Invoice invoice) {
+        primaryStage.setTitle("Preview Invoice Page");
+        primaryStage.setScene(previewInvoicePage);
+        previewInvoicePageCtrl.setInvoice(invoice);
+        previewInvoicePageCtrl.refresh();
     }
 }

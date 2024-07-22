@@ -1,7 +1,6 @@
 package server.api;
 
 import commons.Invoice;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import server.PdfGenerationService;
@@ -119,7 +118,8 @@ public class InvoiceController {
             return ResponseEntity.ok("PDF generated successfully for invoice ID: " + id);
         } catch (Exception e) {
             System.out.println("Failed to generate PDF: " + e.getMessage());
-            return ResponseEntity.internalServerError().body("Failed to generate PDF: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Failed to generate PDF: "
+                + e.getMessage());
         }
     }
 

@@ -138,8 +138,6 @@ public class NewInvoicePageCtrl implements Initializable {
         String bank = bankField.getText();
         String  clientNumber = clientNumberField.getText();
 
-
-
         Invoice res1 = null;
         Client res2 = null;
 
@@ -162,7 +160,7 @@ public class NewInvoicePageCtrl implements Initializable {
         else {
             showSuccess();
             serverUtils.generatePdf(res1.getId());
-            mainCtrl.showIncomeMenuPage();
+            mainCtrl.showPreviewInvoicePage(res1);
         }
     }
 

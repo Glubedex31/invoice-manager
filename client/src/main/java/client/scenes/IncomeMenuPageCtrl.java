@@ -87,26 +87,44 @@ public class IncomeMenuPageCtrl implements Initializable {
         mainCtrl.showStartPage();
     }
 
+    /**
+     * Handles the create invoice button.
+     */
     public void handleCreateInvoice() {
         mainCtrl.showNewInvoicePage();
     }
 
+    /**
+     * Handles the invoice summary button.
+     */
     public void handleInvoiceSummary() {
 
     }
 
+    /**
+     * Handles the create receipt button.
+     */
     public void handleCreateReceipt() {
 
     }
 
+    /**
+     * Handles the receipt summary button.
+     */
     public void handleReceiptSummary() {
 
     }
 
+    /**
+     * Handles the create bank button.
+     */
     public void handleCreateBank() {
 
     }
 
+    /**
+     * Handles the bank summary button.
+     */
     public void handleBankSummary() {
 
     }

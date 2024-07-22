@@ -21,7 +21,8 @@ javafx {
     version = "21.0.2"
     modules = listOf(
             "javafx.controls",
-            "javafx.fxml"
+            "javafx.fxml",
+            "javafx.swing"
     )
 }
 
@@ -41,6 +42,8 @@ dependencies {
     implementation("org.glassfish.jersey.media:jersey-media-json-jackson:3.0.3")
     implementation("org.openjfx:javafx-controls:21.0.2")
     implementation("org.openjfx:javafx-fxml:21.0.2")
+
+    implementation("org.apache.pdfbox:pdfbox:2.0.24")
 
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3")
 

@@ -4,8 +4,6 @@ import com.itextpdf.html2pdf.HtmlConverter;
 import commons.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -17,6 +15,12 @@ public class PdfGenerationService {
     @Autowired
     private TemplateEngine templateEngine;
 
+    /**
+     * Generate a PDF invoice.
+     *
+     * @param invoice the invoice to generate the PDF for
+     * @throws Exception if the PDF cannot be generated
+     */
     public void generateInvoicePdf(Invoice invoice) throws Exception {
         Context context = new Context();
         context.setVariable("invoice", invoice);
