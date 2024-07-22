@@ -16,6 +16,8 @@ public class MainCtrl {
     private Scene settingsPage;
     private IncomeMenuPageCtrl incomeMenuPageCtrl;
     private Scene incomeMenuPage;
+    private NewInvoicePageCtrl newInvoicePageCtrl;
+    private Scene newInvoicePage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -30,7 +32,8 @@ public class MainCtrl {
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
                            Pair<SettingsPageCtrl, Parent> settingsPage,
-                           Pair<IncomeMenuPageCtrl, Parent> incomeMenuPage) {
+                           Pair<IncomeMenuPageCtrl, Parent> incomeMenuPage,
+                           Pair<NewInvoicePageCtrl, Parent> newInvoicePage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -41,6 +44,9 @@ public class MainCtrl {
 
         this.incomeMenuPageCtrl = incomeMenuPage.getKey();
         this.incomeMenuPage = new Scene(incomeMenuPage.getValue());
+
+        this.newInvoicePageCtrl = newInvoicePage.getKey();
+        this.newInvoicePage = new Scene(newInvoicePage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -82,5 +88,14 @@ public class MainCtrl {
         primaryStage.setTitle("Income Menu Page");
         primaryStage.setScene(incomeMenuPage);
         incomeMenuPageCtrl.refresh();
+    }
+
+    /**
+     * Show the new invoice page.
+     */
+    public void showNewInvoicePage() {
+        primaryStage.setTitle("New Invoice Page");
+        primaryStage.setScene(newInvoicePage);
+        newInvoicePageCtrl.refresh();
     }
 }

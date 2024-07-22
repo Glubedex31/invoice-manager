@@ -42,6 +42,9 @@ dependencies {
     implementation("org.openjfx:javafx-controls:21.0.2")
     implementation("org.openjfx:javafx-fxml:21.0.2")
 
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3")
+
+
     implementation(project(":commons"))
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))

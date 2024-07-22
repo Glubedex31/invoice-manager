@@ -88,7 +88,7 @@ public class IncomeMenuPageCtrl implements Initializable {
     }
 
     public void handleCreateInvoice() {
-
+        mainCtrl.showNewInvoicePage();
     }
 
     public void handleInvoiceSummary() {

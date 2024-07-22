@@ -25,8 +25,10 @@
   "validation_error_text": "Va rugam sa completati toate campurile. Campurile sunt fie goale, fie prea lungi.",
   "settings_server_error": "Eroare de server",
   "settings_server_error_text": "A aparut o eroare in timpul incercarii de a salva furnizorul. Va rugam sa incercati mai tarziu.",
+  "settings_server_error_text_invoice": "A aparut o eroare in timpul incercarii de a salva factura. Va rugam sa incercati mai tarziu.",
   "settings_success": "Succes",
   "settings_success_text": "Furnizorul a fost salvat cu succes.",
+  "settings_success_text_invoice": "Factura a fost salvata cu succes.",
 
   "income_menu": "Meniu venit",
   "create_invoice": "Creeaza factura",
@@ -34,5 +36,22 @@
   "create_receipt": "Creeaza chitanta",
   "receipt_summary": "Rezumat chitante",
   "create_bank": "Creeaza extras de cont",
-  "bank_summary": "Rezumat extrase de cont"
+  "bank_summary": "Rezumat extrase de cont",
+
+  "new_invoice": "Factura noua",
+  "invoice_details": "Detalii factura",
+  "client_details": "Detalii client",
+  "invoice_number": "Numar factura",
+  "invoice_series": "Serie factura",
+  "invoice_amount": "Suma factura",
+  "invoice_date": "Data factura",
+  "invoice_meaning": "Scop factura",
+  "client_name": "Nume client",
+  "client_cif": "CIF client",
+  "client_address": "Adresa client",
+  "client_account": "Cont client",
+  "client_bank": "Banca client",
+  "client_number": "Numar client",
+  "digits_error": "Eroare cifre",
+  "digits_error_text": "Va rugam sa introduceti un numar valid pentru suma, numar si serie."
 }

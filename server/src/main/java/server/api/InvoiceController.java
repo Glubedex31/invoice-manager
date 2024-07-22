@@ -1,8 +1,10 @@
 package server.api;
 
 import commons.Invoice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import server.PdfGenerationService;
 import server.database.InvoiceRepository;
 
 import java.util.List;
@@ -11,14 +13,18 @@ import java.util.List;
 @RequestMapping("/api/invoices")
 public class InvoiceController {
     private final InvoiceRepository invoiceRepository;
+    private final PdfGenerationService pdfGenerationService;
 
     /**
      * Constructor for the InvoiceController.
      *
      * @param invoiceRepository the repository for invoices
+     * @param pdfGenerationService the service for generating PDFs
      */
-    public InvoiceController(InvoiceRepository invoiceRepository) {
+    public InvoiceController(InvoiceRepository invoiceRepository,
+                             PdfGenerationService pdfGenerationService) {
         this.invoiceRepository = invoiceRepository;
+        this.pdfGenerationService = pdfGenerationService;
     }
 
     /**
@@ -91,6 +97,30 @@ public class InvoiceController {
         Invoice deleted = invoiceRepository.findById(id).get();
         invoiceRepository.deleteById(id);
         return ResponseEntity.ok(deleted);
+    }
+
+
+
+    /**
+     * Generate a PDF for an invoice.
+     *
+     * @param id the id of the invoice
+     * @return a response entity
+     */
+    @GetMapping("/generate-pdf/{id}")
+    public ResponseEntity<String> generateInvoicePdf(@PathVariable("id") Long id) {
+        try {
+            Invoice invoice = invoiceRepository.findById(id).orElse(null);
+            if (invoice == null) {
+                return ResponseEntity.notFound().build();
+            }
+            pdfGenerationService.generateInvoicePdf(invoice);
+            System.out.println("PDF generated successfully for invoice ID: " + id);
+            return ResponseEntity.ok("PDF generated successfully for invoice ID: " + id);
+        } catch (Exception e) {
+            System.out.println("Failed to generate PDF: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Failed to generate PDF: " + e.getMessage());
+        }
     }
 
     /**

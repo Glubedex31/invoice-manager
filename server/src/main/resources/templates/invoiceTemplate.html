@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title>
+    </title>
+    <style>
+        body { font-family:'Arial'; font-size:12pt }
+        h1, h2, h3, h4, h5, h6, p { margin:0pt }
+        table { margin-top:0pt; margin-bottom:0pt }
+        h1 { margin-top:24pt; margin-bottom:6pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-family:'Times New Roman'; font-size:24pt; font-weight:bold; color:#000000 }
+        h2 { margin-top:18pt; margin-bottom:4pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-family:'Times New Roman'; font-size:18pt; font-weight:bold; color:#000000 }
+        h3 { margin-top:14pt; margin-bottom:4pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-family:'Times New Roman'; font-size:14pt; font-weight:bold; color:#000000 }
+        h4 { margin-top:12pt; margin-bottom:2pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-family:'Times New Roman'; font-size:12pt; font-weight:bold; font-style:normal; color:#000000 }
+        h5 { margin-top:11pt; margin-bottom:2pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-family:'Times New Roman'; font-size:11pt; font-weight:bold; color:#000000 }
+        h6 { margin-top:10pt; margin-bottom:2pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-family:'Times New Roman'; font-size:10pt; font-weight:bold; color:#000000 }
+        .Subtitle { margin-top:18pt; margin-bottom:4pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-family:Georgia; font-size:24pt; font-style:italic; color:#666666 }
+        .Title { margin-top:24pt; margin-bottom:6pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; font-size:36pt; font-weight:bold }
+        .normal0 { font-size:12pt }
+        @media (max-width: 900px) {
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            td, th {
+                padding: 8px;
+                text-align: left;
+                border: none;
+            }
+        }
+        .field-spacing { padding-left: 325px;}
+
+    </style>
+</head>
+<body>
+<p class="normal0" style="font-size:11pt">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<p class="normal0" style="font-size:11pt">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<p class="normal0" style="margin-left:288pt; text-indent:36pt; font-size:11pt">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<p class="normal0" style="margin-left:144pt; text-indent:36pt; font-size:11pt">
+    <strong><span style="font-family:Arial; ">Seria <span th:text="${invoice.series}"></span></span></strong><strong><span style="font-family:Arial; ">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span></strong><strong><span style="font-family:Arial; ">Nr. <span th:text="${invoice.number}"></span></span></strong>
+</p>
+<p class="normal0" style="margin-left:288pt; text-indent:36pt; font-size:11pt">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<p class="normal0" style="font-size:11pt">
+    <span style="font-family:Arial">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>
+</p>
+<table>
+    <tr>
+        <td style="font-size:11pt">Furnizor: <span th:text="${invoice.provider.name}">-</span></td>
+        <td class="field-spacing" style="font-size:11pt">Cumparator: <span th:text="${invoice.client.name}">-</span></td>
+    </tr>
+    <tr>
+        <td style="font-size:11pt">C.U.I.: <span th:text="${invoice.provider.cif}">-</span></td>
+        <td class="field-spacing" style="font-size:11pt">C.U.I.: <span th:text="${invoice.client.cif}">-</span></td>
+    </tr>
+    <tr>
+        <td style="font-size:11pt">Sediu: <span th:text="${invoice.provider.address}">-</span></td>
+        <td class="field-spacing" style="font-size:11pt">Sediu: <span th:text="${invoice.client.address}">-</span></td>
+    </tr>
+    <tr>
+        <td style="font-size:11pt">Judetul: Braila</td>
+        <td class="field-spacing" style="font-size:11pt">Judetul: Brăila</td>
+    </tr>
+    <tr>
+        <td style="font-size:11pt">Contul: <span th:text="${invoice.provider.account}">-</span></td>
+        <td class="field-spacing" style="font-size:11pt">Contul: <span th:text="${invoice.client.account}">-</span></td>
+    </tr>
+    <tr>
+        <td style="font-size:11pt">Banca: <span th:text="${invoice.provider.bank}">-</span></td>
+        <td class="field-spacing" style="font-size:11pt">Banca: <span th:text="${invoice.client.bank}">-</span></td>
+    </tr>
+</table>
+<p class="normal0" style="font-size:11pt">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<p class="normal0">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<p class="normal0" style="margin-left:180pt">
+    <strong><span style="font-family:Arial; ">&#xa0; </span></strong><strong><span style="font-family:Arial; ">F A C T U R A </span></strong>
+</p>
+<table style="width:128.3pt; margin-left:162.8pt; border:0.75pt solid #000000; border-collapse:collapse">
+    <tr>
+        <td style="border-bottom:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">Nr. facturii <span th:text="${invoice.number}"></span></span>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td style="border-top:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">Data <span th:text="${invoice.date}"></span></span>
+            </p>
+        </td>
+    </tr>
+</table>
+<p class="normal0">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<p class="normal0">
+    <span style="font-family:Arial">&#xa0;</span>
+</p>
+<table style="width:517.15pt; border-collapse:collapse">
+    <tr>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">Nr.</span>
+            </p>
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">Crt.</span>
+            </p>
+        </td>
+        <td colspan="2" style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">Denumirea produselor sau a serviciilor</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">U.M.</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">Cantitatea</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">Pretul unitar</span>
+            </p>
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">Valoare</span>
+            </p>
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">-lei-</span>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">0</span>
+            </p>
+        </td>
+        <td colspan="2" style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">1</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">2</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">3</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">4</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">5(3x4)</span>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+        </td>
+        <td colspan="2" style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0" style="font-size:11pt">
+                <em><span style="font-family:Arial; ">&#xa0;</span></em>
+            </p>
+            <p class="normal0">
+                <em><span style="font-family:Arial; ">&#xa0;</span></em>
+            </p>
+            <p class="normal0" style="text-align:justify; font-size:9pt">
+                <span style="font-family:Arial">Factura circula fara semnatura si stampila conform Legii nr. 227/2015 privind Codul Fiscal – art. 319 (29)</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">-</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+        </td>
+    </tr>
+    <tr style="height:25.6pt">
+        <td colspan="2" style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">Semnatura si stampila furnizorului</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">Intocmit</span><span style="font-family:Arial">&#xa0;</span><span style="font-family:Arial">: </span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">C.I. </span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">CNP </span>
+            </p>
+        </td>
+        <td colspan="3" style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">Date privind expeditia:</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">Numele delegatului </span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0">
+                <span style="font-family:Arial">Total </span>
+            </p>
+            <p class="normal0">
+                <span style="font-family:Arial">&#xa0;</span>
+            </p>
+        </td>
+        <td style="border:0.75pt solid #000000; padding-right:5.38pt; padding-left:5.38pt; vertical-align:top">
+            <p class="normal0" style="text-align:center">
+                <span style="font-family:Arial"><span th:text="${invoice.number}"></span></span>
+            </p>
+        </td>
+    </tr>
+    <tr style="height:0pt">
+        <td style="width:32.45pt">
+        </td>
+        <td style="width:95.9pt">
+        </td>
+        <td style="width:134.6pt">
+        </td>
+        <td style="width:44.2pt">
+        </td>
+        <td style="width:71.4pt">
+        </td>
+        <td style="width:85.65pt">
+        </td>
+        <td style="width:52.2pt">
+        </td>
+    </tr>
+</table>
+<p class="normal0">
+    &#xa0;
+</p>
+</body>
+</html>

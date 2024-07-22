@@ -1,5 +1,6 @@
 package client.utils;
 
+import commons.Client;
 import commons.Provider;
 import jakarta.ws.rs.client.ClientBuilder;
 import commons.Invoice;
@@ -89,6 +90,19 @@ public class ServerUtils {
     }
 
     /**
+     * Generate a pdf.
+     * @param id The id
+     * @return success or failure
+     */
+    public String generatePdf(long id) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/invoices/generate-pdf/" + id)
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .get(String.class);
+    }
+
+    /**
      * Get a provider by id.
      * @param id The id
      * @return The provider
@@ -125,5 +139,18 @@ public class ServerUtils {
             .request(APPLICATION_JSON)
             .accept(APPLICATION_JSON)
             .put(Entity.entity(provider, APPLICATION_JSON), Provider.class);
+    }
+
+    /**
+     * Adds a client.
+     * @param client The client
+     * @return The client
+     */
+    public Client addClient(Client client) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/clients")
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .post(Entity.entity(client, APPLICATION_JSON), Client.class);
     }
 }
