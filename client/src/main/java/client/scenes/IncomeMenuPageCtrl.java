@@ -98,7 +98,7 @@ public class IncomeMenuPageCtrl implements Initializable {
      * Handles the invoice summary button.
      */
     public void handleInvoiceSummary() {
-
+        mainCtrl.showInvoiceSummaryPage();
     }
 
     /**

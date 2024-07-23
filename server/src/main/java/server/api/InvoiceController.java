@@ -89,7 +89,7 @@ public class InvoiceController {
      * @return the deleted invoice
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Invoice> deleteInvoice(@PathVariable long id) {
+    public ResponseEntity<Invoice> deleteInvoice(@PathVariable("id") long id) {
         if(!invoiceRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -97,8 +97,6 @@ public class InvoiceController {
         invoiceRepository.deleteById(id);
         return ResponseEntity.ok(deleted);
     }
-
-
 
     /**
      * Generate a PDF for an invoice.

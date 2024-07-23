@@ -57,5 +57,20 @@
 
   "preview_save_receipt": "Salveaza + Chitanta",
   "preview_delete": "Sterge",
-  "preview_edit": "Editeaza"
+  "preview_edit": "Editeaza",
+  "preview_delete_success": "Stergere cu succes",
+  "preview_delete_success_text": "Factura a fost stearsa cu succes.",
+  "preview_delete_error": "Eroare la stergere",
+  "preview_delete_error_text": "A aparut o eroare in timpul incercarii de a sterge factura. Va rugam sa incercati mai tarziu.",
+  "preview_delete_confirm": "Confirmare stergere",
+  "preview_delete_confirm_text": "Sunteti sigur ca doriti sa stergeti aceasta factura?",
+  "preview_delete_confirm_header": "Stergere factura",
+  "preview_delete_cancel": "Anuleaza",
+  "preview_delete_yes": "Da",
+
+  "summary_load_error_title": "Eroare",
+  "summary_load_error_text": "A aparut o eroare in timpul incercarii de a incarca datele. Va rugam sa incercati mai tarziu.",
+
+  "invoice": "Factura",
+  "nr": "Nr."
 }

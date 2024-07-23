@@ -142,6 +142,19 @@ public class ServerUtils {
     }
 
     /**
+     * Update a client.
+     * @param client The client
+     * @return The client
+     */
+    public Client updateClient(Client client) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/clients/" + client.getId())
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .put(Entity.entity(client, APPLICATION_JSON), Client.class);
+    }
+
+    /**
      * Adds a client.
      * @param client The client
      * @return The client
@@ -152,5 +165,17 @@ public class ServerUtils {
             .request(APPLICATION_JSON)
             .accept(APPLICATION_JSON)
             .post(Entity.entity(client, APPLICATION_JSON), Client.class);
+    }
+
+    /**
+     * Deletes an invoice.
+     * @param id The id
+     */
+    public void deleteInvoice(long id) {
+        ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/invoices/" + id)
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .delete();
     }
 }

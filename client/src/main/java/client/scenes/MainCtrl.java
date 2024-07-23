@@ -21,6 +21,8 @@ public class MainCtrl {
     private Scene newInvoicePage;
     private PreviewInvoicePageCtrl previewInvoicePageCtrl;
     private Scene previewInvoicePage;
+    private InvoiceSummaryPageCtrl invoiceSummaryPageCtrl;
+    private Scene invoiceSummaryPage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -40,7 +42,8 @@ public class MainCtrl {
                            Pair<SettingsPageCtrl, Parent> settingsPage,
                            Pair<IncomeMenuPageCtrl, Parent> incomeMenuPage,
                            Pair<NewInvoicePageCtrl, Parent> newInvoicePage,
-                           Pair<PreviewInvoicePageCtrl, Parent> previewInvoicePage) {
+                           Pair<PreviewInvoicePageCtrl, Parent> previewInvoicePage,
+                           Pair<InvoiceSummaryPageCtrl, Parent> invoiceSummaryPage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -57,6 +60,9 @@ public class MainCtrl {
 
         this.previewInvoicePageCtrl = previewInvoicePage.getKey();
         this.previewInvoicePage = new Scene(previewInvoicePage.getValue());
+
+        this.invoiceSummaryPageCtrl = invoiceSummaryPage.getKey();
+        this.invoiceSummaryPage = new Scene(invoiceSummaryPage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -106,7 +112,17 @@ public class MainCtrl {
     public void showNewInvoicePage() {
         primaryStage.setTitle("New Invoice Page");
         primaryStage.setScene(newInvoicePage);
-        newInvoicePageCtrl.refresh();
+        newInvoicePageCtrl.refresh(false, null);
+    }
+
+    /**
+     * Show the edit invoice page.
+     * @param invoice The invoice to edit
+     */
+    public void showEditInvoicePage(Invoice invoice) {
+        primaryStage.setTitle("Edit Invoice Page");
+        primaryStage.setScene(newInvoicePage);
+        newInvoicePageCtrl.refresh(true, invoice);
     }
 
     /**
@@ -118,5 +134,14 @@ public class MainCtrl {
         primaryStage.setScene(previewInvoicePage);
         previewInvoicePageCtrl.setInvoice(invoice);
         previewInvoicePageCtrl.refresh();
+    }
+
+    /**
+     * Show the invoice summary page.
+     */
+    public void showInvoiceSummaryPage() {
+        primaryStage.setTitle("Invoice Summary Page");
+        primaryStage.setScene(invoiceSummaryPage);
+        invoiceSummaryPageCtrl.refresh();
     }
 }

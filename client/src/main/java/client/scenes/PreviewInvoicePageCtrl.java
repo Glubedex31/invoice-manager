@@ -7,7 +7,9 @@ import commons.Invoice;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -19,7 +21,11 @@ import javafx.scene.image.ImageView;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PreviewInvoicePageCtrl implements Initializable {
@@ -28,8 +34,8 @@ public class PreviewInvoicePageCtrl implements Initializable {
     private Invoice invoice;
     private final ServerUtils serverUtils;
 
-    @FXML
-    private Button backButton;
+//    @FXML
+//    private Button backButton;
     @FXML
     private Button saveButton;
     @FXML
@@ -73,7 +79,8 @@ public class PreviewInvoicePageCtrl implements Initializable {
         updateLanguage();
         if (invoice != null) {
             try {
-                File file = new File("src/main/resources/invoices/invoice_" + invoice.getId() + ".pdf");
+                File file = new File("src/main/resources/invoices/invoice_"
+                    + invoice.getId() + ".pdf");
                 PDDocument document = PDDocument.load(file);
                 PDFRenderer renderer = new PDFRenderer(document);
 
@@ -103,7 +110,7 @@ public class PreviewInvoicePageCtrl implements Initializable {
     public void updateLanguage() {
         Map<String, String> map = clientUtils.getLanguageMap();
 
-        backButton.setText(map.get("settings_back"));
+        //backButton.setText(map.get("settings_back"));
         saveButton.setText(map.get("settings_save"));
         saveButtonReceipt.setText(map.get("preview_save_receipt"));
         deleteButton.setText(map.get("preview_delete"));
@@ -133,25 +140,87 @@ public class PreviewInvoicePageCtrl implements Initializable {
         mainCtrl.showIncomeMenuPage();
     }
 
-    /**
-     * Handles the back button.
-     */
-    public void handleBack() {
-        mainCtrl.showStartPage();
-    }
+// A back button doesn't really make sense on this page
+
+//    /**
+//     * Handles the back button.
+//     */
+//    public void handleBack() {
+//        mainCtrl.showNewInvoicePage();
+//    }
 
     /**
      * Handles the delete button.
      */
     public void handleDelete() {
-        //TODO: Implement delete invoice
+        boolean result = deleteConfirmation();
+
+        if (result) {
+            try {
+                serverUtils.deleteInvoice(invoice.getId());
+
+                Path path = Paths.get("src/main/resources/invoices/invoice_"
+                    + invoice.getId() + ".pdf");
+                Files.delete(path);
+
+                showSuccess();
+                mainCtrl.showIncomeMenuPage();
+            } catch (Exception e) {
+                showError();
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Shows a delete confirmation.
+     * @return true if the user confirms the deletion, false otherwise
+     */
+    private boolean deleteConfirmation() {
+        Map<String, String> map = clientUtils.getLanguageMap();
+        ButtonType deleteButton = new ButtonType(map.get("preview_delete_yes"));
+        ButtonType cancelButton = new ButtonType(map.get("preview_delete_cancel"));
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+            map.get("preview_delete_confirm_text"),
+            deleteButton,
+            cancelButton);
+        alert.setTitle(map.get("preview_delete_confirm"));
+        alert.setHeaderText(map.get("preview_delete_confirm_header"));
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == deleteButton;
+    }
+
+    /**
+     * Shows a success message.
+     */
+    private void showSuccess() {
+        Map<String, String> map = clientUtils.getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(map.get("preview_delete_success"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("preview_delete_success_text"));
+        alert.showAndWait();
+    }
+
+    /**
+     * Shows an error message.
+     */
+    private void showError() {
+        Map<String, String> map = clientUtils.getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(map.get("preview_delete_error"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("preview_delete_error_text"));
+        alert.showAndWait();
     }
 
     /**
      * Handles the edit button.
      */
     public void handleEdit() {
-        //TODO: Implement edit invoice
+        mainCtrl.showEditInvoicePage(invoice);
     }
 
     /**

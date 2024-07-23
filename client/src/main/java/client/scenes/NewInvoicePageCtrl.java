@@ -40,7 +40,7 @@ public class NewInvoicePageCtrl implements Initializable {
     @FXML
     private DatePicker dateField;
     @FXML
-    private TextArea meaningField;;
+    private TextArea meaningField;
     @FXML
     private TextField nameField;
     @FXML
@@ -55,6 +55,8 @@ public class NewInvoicePageCtrl implements Initializable {
     private TextField clientNumberField;
 
     private Provider provider;
+    private boolean isEdit;
+    private Invoice invoice;
 
     /**
      * Constructor.
@@ -81,10 +83,29 @@ public class NewInvoicePageCtrl implements Initializable {
 
     /**
      * Refresh the page.
+     * @param isEdit True if the invoice is being edited, false otherwise
+     * @param invoice The invoice
      */
-    public void refresh() {
+    public void refresh(boolean isEdit, Invoice invoice) {
         provider = serverUtils.getProviders().get(0);
         updateLanguage();
+
+        this.isEdit = isEdit;
+        this.invoice = invoice;
+
+        if(isEdit) {
+            numberField.setText(String.valueOf(invoice.getNumber()));
+            seriesField.setText(String.valueOf(invoice.getSeries()));
+            amountField.setText(String.valueOf(invoice.getAmount()));
+            dateField.setValue(invoice.getDate());
+            meaningField.setText(invoice.getMeaning());
+            nameField.setText(invoice.getClient().getName());
+            cifField.setText(invoice.getClient().getCif());
+            addressField.setText(invoice.getClient().getAddress());
+            accountField.setText(invoice.getClient().getAccount());
+            bankField.setText(invoice.getClient().getBank());
+            clientNumberField.setText(invoice.getClient().getNumber());
+        }
     }
 
     /**
@@ -125,6 +146,57 @@ public class NewInvoicePageCtrl implements Initializable {
             return;
         }
 
+        if(isEdit) {
+            handleSaveEdit();
+        }
+        else {
+            handleSaveCreate();
+        }
+    }
+
+    /**
+     * Handles the save button for the edit case.
+     */
+    public void handleSaveEdit() {
+        invoice.setNumber(Long.parseLong(numberField.getText()));
+        invoice.setSeries(Long.parseLong(seriesField.getText()));
+        invoice.setAmount(Long.parseLong(amountField.getText()));
+        invoice.setDate(dateField.getValue());
+        invoice.setMeaning(meaningField.getText());
+
+        invoice.getClient().setName(nameField.getText());
+        invoice.getClient().setCif(cifField.getText());
+        invoice.getClient().setAddress(addressField.getText());
+        invoice.getClient().setAccount(accountField.getText());
+        invoice.getClient().setBank(bankField.getText());
+        invoice.getClient().setNumber(clientNumberField.getText());
+
+        Invoice res1 = null;
+        Client res2 = null;
+
+        try {
+            res2 = serverUtils.updateClient(invoice.getClient());
+            res1 = serverUtils.updateInvoice(invoice);
+        } catch (Exception e) {
+            showServerError();
+            return;
+        }
+
+        if(res1 == null || res2 == null) {
+            showServerError();
+        }
+        else {
+            showSuccess();
+            serverUtils.generatePdf(res1.getId());
+            mainCtrl.showPreviewInvoicePage(res1);
+        }
+    }
+
+    /**
+     * Handles the save button for the creation case.
+     */
+    public void handleSaveCreate() {
+
         long number = Long.parseLong(numberField.getText());
         long series = Long.parseLong(seriesField.getText());
         long amount = Long.parseLong(amountField.getText());
@@ -145,9 +217,9 @@ public class NewInvoicePageCtrl implements Initializable {
             Client client = new Client(name, cif, address, account, bank, clientNumber);
             res2 = serverUtils.addClient(client);
 
-            Invoice invoice = new Invoice(number, series, amount, date, res2,
+            Invoice newInvoice = new Invoice(number, series, amount, date, res2,
                 provider, meaning, false);
-            res1 = serverUtils.addInvoice(invoice);
+            res1 = serverUtils.addInvoice(newInvoice);
         } catch (Exception e) {
             showServerError();
             return;
@@ -155,7 +227,6 @@ public class NewInvoicePageCtrl implements Initializable {
 
         if(res1 == null || res2 == null) {
             showServerError();
-            return;
         }
         else {
             showSuccess();
@@ -243,6 +314,11 @@ public class NewInvoicePageCtrl implements Initializable {
      * Handles the back button.
      */
     public void handleBack() {
-        mainCtrl.showStartPage();
+        if(isEdit) {
+            mainCtrl.showPreviewInvoicePage(invoice);
+        }
+        else {
+            mainCtrl.showIncomeMenuPage();
+        }
     }
 }
