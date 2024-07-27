@@ -1,9 +1,7 @@
 package client.utils;
 
-import commons.Client;
-import commons.Provider;
+import commons.*;
 import jakarta.ws.rs.client.ClientBuilder;
-import commons.Invoice;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.GenericType;
 import org.glassfish.jersey.client.ClientConfig;
@@ -177,5 +175,133 @@ public class ServerUtils {
             .request(APPLICATION_JSON)
             .accept(APPLICATION_JSON)
             .delete();
+    }
+
+    /**
+     * Adds a receipt.
+     * @param receipt The receipt
+     * @return The receipt
+     */
+    public Receipt addReceipt(Receipt receipt) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/receipts")
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .post(Entity.entity(receipt, APPLICATION_JSON), Receipt.class);
+    }
+
+    /**
+     * Deletes a receipt.
+     * @param id The id
+     */
+    public void deleteReceipt(long id) {
+        ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/receipts/" + id)
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .delete();
+    }
+
+    /**
+     * Updates a receipt.
+     * @param receipt The receipt
+     * @return The receipt
+     */
+    public Receipt updateReceipt(Receipt receipt) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/receipts/" + receipt.getId())
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .put(Entity.entity(receipt, APPLICATION_JSON), Receipt.class);
+    }
+
+    /**
+     * Gets all receipts.
+     * @return The receipts
+     */
+    public List<Receipt> getReceipts() {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/receipts")
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .get(new GenericType<List<Receipt>>() {
+            });
+    }
+
+    /**
+     * Gets a receipt by id.
+     * @param id The id
+     * @return The receipt
+     */
+    public Receipt getReceipt(long id) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/receipts/" + id)
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .get(Receipt.class);
+    }
+
+    /**
+     * Adds a payment.
+     * @param payment The payment
+     * @return The payment
+     */
+    public Payment addPayment(Payment payment) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/payments")
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .post(Entity.entity(payment, APPLICATION_JSON), Payment.class);
+    }
+
+    /**
+     * Deletes a payment.
+     * @param id The id
+     */
+    public void deletePayment(long id) {
+        ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/payments/" + id)
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .delete();
+    }
+
+    /**
+     * Updates a payment.
+     * @param payment The payment
+     * @return The payment
+     */
+    public Payment updatePayment(Payment payment) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/payments/" + payment.getId())
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .put(Entity.entity(payment, APPLICATION_JSON), Payment.class);
+    }
+
+    /**
+     * Gets all payments.
+     * @return The payments
+     */
+    public List<Payment> getPayments() {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/payments")
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .get(new GenericType<List<Payment>>() {
+            });
+    }
+
+    /**
+     * Gets a payment by id.
+     * @param id The id
+     * @return The payment
+     */
+    public Payment getPayment(long id) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/payments/" + id)
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .get(Payment.class);
     }
 }
