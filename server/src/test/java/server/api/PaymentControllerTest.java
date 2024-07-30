@@ -31,7 +31,7 @@ class PaymentControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        samplePayment = new Payment("Service Charge", 100);
+        samplePayment = new Payment("Service Charge", 100, false);
         samplePayment.setId(1); // Simulating that it's fetched from a database.
     }
 
@@ -69,7 +69,7 @@ class PaymentControllerTest {
 
     @Test
     void addPaymentBadRequestTest() {
-        Payment invalidPayment = new Payment("", 0); // Invalid because meaning is empty.
+        Payment invalidPayment = new Payment("", 0, false); // Invalid because meaning is empty.
         ResponseEntity<Payment> response = paymentController.addPayment(invalidPayment);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
