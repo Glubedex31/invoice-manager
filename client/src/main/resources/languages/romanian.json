@@ -29,6 +29,7 @@
   "settings_success": "Succes",
   "settings_success_text": "Furnizorul a fost salvat cu succes.",
   "settings_success_text_invoice": "Factura a fost salvata cu succes.",
+  "settings_success_text_expense": "Cheltuiala a fost salvata cu succes.",
 
   "income_menu": "Meniu Venit",
   "create_invoice": "Creeaza Factura",
@@ -53,7 +54,8 @@
   "client_bank": "Banca Client",
   "client_number": "Numar Client",
   "digits_error": "Eroare cifre",
-  "digits_error_text": "Va rugam sa introduceti un numar valid pentru suma, numar si serie.",
+  "digits_error_text": "Va rugam sa introduceti un numar valid pentru campurile Suma, Numar si Serie.",
+  "digits_error_text_expense": "Va rugam sa introduceti un numar valid pentru campul Numar.",
 
   "preview_save_receipt": "Salveaza + Chitanta",
   "preview_delete": "Sterge",
@@ -76,5 +78,10 @@
 
   "payment_menu": "Meniu Cheltuieli",
   "create_payment": "Creeaza Cheltuiala",
-  "payment_summary": "Rezumat Cheltuieli"
+  "payment_summary": "Rezumat Cheltuieli",
+
+  "new_expense": "Cheltuiala Noua",
+  "expense_cash": "Casierie",
+  "expense_bank": "Banca",
+  "payment_details": "Detalii Cheltuiala"
 }

@@ -26,9 +26,11 @@
   "settings_server_error": "Server error",
   "settings_server_error_text": "An error occurred while trying to save the provider. Please try again later.",
   "settings_server_error_text_invoice": "An error occurred while trying to save the invoice. Please try again later.",
+  "settings_server_error_text_expense": "An error occurred while trying to save the expense. Please try again later.",
   "settings_success": "Success",
   "settings_success_text": "Provider saved successfully.",
   "settings_success_text_invoice": "Invoice saved successfully.",
+  "settings_success_text_expense": "Expense saved successfully.",
 
   "income_menu": "Income Menu",
   "create_invoice": "Create Invoice",
@@ -53,7 +55,8 @@
   "client_bank": "Client Bank",
   "client_number": "Client Number",
   "digits_error": "Digits error",
-  "digits_error_text": "Please enter a valid number for the amount, number and series.",
+  "digits_error_text": "Please enter a valid number for the fields Amount, Number and Series.",
+  "digits_error_text_expense": "Please enter a valid number for the field Number.",
 
   "preview_save_receipt": "Save + Receipt",
   "preview_delete": "Delete",
@@ -76,5 +79,10 @@
 
   "payment_menu": "Expenses Menu",
   "create_payment": "Create Expense",
-  "payment_summary": "Expenses Summary"
+  "payment_summary": "Expenses Summary",
+
+  "new_expense": "New Expense",
+  "expense_cash": "Cash",
+  "expense_bank": "Bank",
+  "payment_details": "Expense Details"
 }
