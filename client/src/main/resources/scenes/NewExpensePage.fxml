@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.NewExpensePage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.NewExpensePageCtrl">
    <children>
       <Text fx:id="title" layoutX="223.0" layoutY="75.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="New Expense" textAlignment="CENTER" wrappingWidth="154.3267822265625" />
       <Button fx:id="backButton" layoutX="53.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />

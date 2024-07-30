@@ -33,7 +33,8 @@ public class PaymentMenuPageCtrl implements Initializable {
      * @param serverUtils The server utils
      */
     @Inject
-    public PaymentMenuPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils, ServerUtils serverUtils) {
+    public PaymentMenuPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils,
+                               ServerUtils serverUtils) {
         this.mainCtrl = mainCtrl;
         this.clientUtils = clientUtils;
         this.serverUtils = serverUtils;
@@ -72,7 +73,7 @@ public class PaymentMenuPageCtrl implements Initializable {
      * Handles the create payment button.
      */
     public void handleCreatePayment() {
-        //mainCtrl.showNewPaymentPage();
+        mainCtrl.showNewExpensePage();
     }
 
     /**

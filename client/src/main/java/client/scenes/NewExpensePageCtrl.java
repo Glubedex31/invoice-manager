@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class NewExpensePage implements Initializable {
+public class NewExpensePageCtrl implements Initializable {
     private final MainCtrl mainCtrl;
     private final ClientUtils clientUtils;
     private final ServerUtils serverUtils;
@@ -46,7 +46,7 @@ public class NewExpensePage implements Initializable {
      * @param serverUtils The server utils
      */
     @Inject
-    public NewExpensePage(MainCtrl mainCtrl, ClientUtils clientUtils, ServerUtils serverUtils) {
+    public NewExpensePageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils, ServerUtils serverUtils) {
         this.mainCtrl = mainCtrl;
         this.clientUtils = clientUtils;
         this.serverUtils = serverUtils;
@@ -250,6 +250,9 @@ public class NewExpensePage implements Initializable {
         }
     }
 
+    /**
+     * Handles the checkbox.
+     */
     @FXML
     private void handleCheckbox() {
         if (cashCheckbox.isSelected() && bankCheckbox.isSelected()) {

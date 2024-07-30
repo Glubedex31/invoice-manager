@@ -25,6 +25,8 @@ public class MainCtrl {
     private Scene invoiceSummaryPage;
     private PaymentMenuPageCtrl paymentMenuPageCtrl;
     private Scene paymentMenuPage;
+    private NewExpensePageCtrl newExpensePageCtrl;
+    private Scene newExpensePage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -38,6 +40,9 @@ public class MainCtrl {
      * @param incomeMenuPage The income menu page
      * @param newInvoicePage The new invoice page
      * @param previewInvoicePage The preview invoice page
+     * @param invoiceSummaryPage The invoice summary page
+     * @param paymentMenuPage The payment menu page
+     * @param newExpensePage The new expense page
      */
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
@@ -46,7 +51,8 @@ public class MainCtrl {
                            Pair<NewInvoicePageCtrl, Parent> newInvoicePage,
                            Pair<PreviewInvoicePageCtrl, Parent> previewInvoicePage,
                            Pair<InvoiceSummaryPageCtrl, Parent> invoiceSummaryPage,
-                           Pair<PaymentMenuPageCtrl, Parent> paymentMenuPage) {
+                           Pair<PaymentMenuPageCtrl, Parent> paymentMenuPage,
+                           Pair<NewExpensePageCtrl, Parent> newExpensePage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -69,6 +75,9 @@ public class MainCtrl {
 
         this.paymentMenuPageCtrl = paymentMenuPage.getKey();
         this.paymentMenuPage = new Scene(paymentMenuPage.getValue());
+
+        this.newExpensePageCtrl = newExpensePage.getKey();
+        this.newExpensePage = new Scene(newExpensePage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -158,5 +167,14 @@ public class MainCtrl {
         primaryStage.setTitle("Payment Menu Page");
         primaryStage.setScene(paymentMenuPage);
         paymentMenuPageCtrl.refresh();
+    }
+
+    /**
+     * Show the new expense page.
+     */
+    public void showNewExpensePage() {
+        primaryStage.setTitle("New Expense Page");
+        primaryStage.setScene(newExpensePage);
+        newExpensePageCtrl.refresh(false, null);
     }
 }

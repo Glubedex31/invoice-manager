@@ -37,7 +37,8 @@ public class InvoiceSummaryPageCtrl implements Initializable {
      * @param serverUtils The server utils
      */
     @Inject
-    public InvoiceSummaryPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils, ServerUtils serverUtils) {
+    public InvoiceSummaryPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils,
+                                  ServerUtils serverUtils) {
         this.mainCtrl = mainCtrl;
         this.clientUtils = clientUtils;
         this.serverUtils = serverUtils;
@@ -53,6 +54,9 @@ public class InvoiceSummaryPageCtrl implements Initializable {
         // TODO
     }
 
+    /**
+     * Refresh the controller.
+     */
     public void refresh() {
         updateLanguage();
         loadInvoices();
@@ -71,7 +75,8 @@ public class InvoiceSummaryPageCtrl implements Initializable {
             }
         };
 
-        task.setOnSucceeded(invoice -> listView.setItems(FXCollections.observableArrayList(task.getValue())));
+        task.setOnSucceeded(invoice ->
+            listView.setItems(FXCollections.observableArrayList(task.getValue())));
         task.setOnFailed(invoice -> {
             Throwable cause = task.getException();
             cause.printStackTrace();
