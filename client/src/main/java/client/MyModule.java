@@ -28,6 +28,8 @@ public class MyModule implements Module {
         binder.bind(NewExpensePageCtrl.class).in(Scopes.SINGLETON);
         binder.bind(ExpenseSummaryPageCtrl.class).in(Scopes.SINGLETON);
         binder.bind(PreviewExpensePageCtrl.class).in(Scopes.SINGLETON);
+        binder.bind(NewReceiptPageCtrl.class).in(Scopes.SINGLETON);
+        binder.bind(PreviewReceiptPageCtrl.class).in(Scopes.SINGLETON);
 
         binder.bind(ConfigUtils.class).in(Scopes.SINGLETON);
         binder.bind(ClientUtils.class).in(Scopes.SINGLETON);

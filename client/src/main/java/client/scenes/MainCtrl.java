@@ -3,6 +3,7 @@ package client.scenes;
 import com.google.inject.Inject;
 import commons.Invoice;
 import commons.Payment;
+import commons.Receipt;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -32,6 +33,10 @@ public class MainCtrl {
     private Scene expenseSummaryPage;
     private PreviewExpensePageCtrl previewExpensePageCtrl;
     private Scene previewExpensePage;
+    private NewReceiptPageCtrl newReceiptPageCtrl;
+    private Scene newReceiptPage;
+    private PreviewReceiptPageCtrl previewReceiptPageCtrl;
+    private Scene previewReceiptPage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -50,6 +55,8 @@ public class MainCtrl {
      * @param newExpensePage The new expense page
      * @param expenseSummaryPage The expense summary page
      * @param previewExpensePage The preview expense page
+     * @param newReceiptPage The new receipt page
+     * @param previewReceiptPage The preview receipt page
      */
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
@@ -61,7 +68,9 @@ public class MainCtrl {
                            Pair<PaymentMenuPageCtrl, Parent> paymentMenuPage,
                            Pair<NewExpensePageCtrl, Parent> newExpensePage,
                            Pair<ExpenseSummaryPageCtrl, Parent> expenseSummaryPage,
-                           Pair<PreviewExpensePageCtrl, Parent> previewExpensePage) {
+                           Pair<PreviewExpensePageCtrl, Parent> previewExpensePage,
+                           Pair<NewReceiptPageCtrl, Parent> newReceiptPage,
+                           Pair<PreviewReceiptPageCtrl, Parent> previewReceiptPage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -93,6 +102,12 @@ public class MainCtrl {
 
         this.previewExpensePageCtrl = previewExpensePage.getKey();
         this.previewExpensePage = new Scene(previewExpensePage.getValue());
+
+        this.newReceiptPageCtrl = newReceiptPage.getKey();
+        this.newReceiptPage = new Scene(newReceiptPage.getValue());
+
+        this.previewReceiptPageCtrl = previewReceiptPage.getKey();
+        this.previewReceiptPage = new Scene(previewReceiptPage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -172,7 +187,16 @@ public class MainCtrl {
     public void showInvoiceSummaryPage() {
         primaryStage.setTitle("Invoice Summary Page");
         primaryStage.setScene(invoiceSummaryPage);
-        invoiceSummaryPageCtrl.refresh();
+        invoiceSummaryPageCtrl.refresh(false);
+    }
+
+    /**
+     * Show the invoice summary page on receipt menu.
+     */
+    public void showChooseInvoicePage() {
+        primaryStage.setTitle("Choose Invoice Page");
+        primaryStage.setScene(invoiceSummaryPage);
+        invoiceSummaryPageCtrl.refresh(true);
     }
 
     /**
@@ -221,5 +245,36 @@ public class MainCtrl {
         primaryStage.setTitle("Expense Summary Page");
         primaryStage.setScene(expenseSummaryPage);
         expenseSummaryPageCtrl.refresh();
+    }
+
+    /**
+     * Show the new receipt page.
+     * @param invoice The invoice
+     */
+    public void showNewReceiptPage(Invoice invoice) {
+        primaryStage.setTitle("New Receipt Page");
+        primaryStage.setScene(newReceiptPage);
+        newReceiptPageCtrl.refresh(false, null, invoice);
+    }
+
+    /**
+     * Show the edit receipt page.
+     * @param receipt The receipt to edit
+     */
+    public void showEditReceiptPage(Receipt receipt) {
+        primaryStage.setTitle("Edit Receipt Page");
+        primaryStage.setScene(newReceiptPage);
+        newReceiptPageCtrl.refresh(true, receipt, receipt.getInvoice());
+    }
+
+    /**
+     * Show the preview receipt page.
+     * @param receipt The receipt to preview
+     */
+    public void showPreviewReceiptPage(Receipt receipt) {
+        primaryStage.setTitle("Preview Receipt Page");
+        primaryStage.setScene(previewReceiptPage);
+        previewReceiptPageCtrl.setReceipt(receipt);
+        previewReceiptPageCtrl.refresh();
     }
 }

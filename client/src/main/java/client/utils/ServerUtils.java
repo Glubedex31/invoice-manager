@@ -88,13 +88,26 @@ public class ServerUtils {
     }
 
     /**
-     * Generate a pdf.
+     * Generate an invoice pdf.
      * @param id The id
      * @return success or failure
      */
-    public String generatePdf(long id) {
+    public String generateInvoicePdf(long id) {
         return ClientBuilder.newClient(new ClientConfig())
             .target(SERVER).path("api/invoices/generate-pdf/" + id)
+            .request(APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .get(String.class);
+    }
+
+    /**
+     * Generate a receipt pdf.
+     * @param id The id
+     * @return success or failure
+     */
+    public String generateReceiptPdf(long id) {
+        return ClientBuilder.newClient(new ClientConfig())
+            .target(SERVER).path("api/receipt/generate-pdf/" + id)
             .request(APPLICATION_JSON)
             .accept(APPLICATION_JSON)
             .get(String.class);

@@ -12,7 +12,7 @@
    <children>
       <Text fx:id="title" layoutX="199.0" layoutY="76.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="New Expense" textAlignment="CENTER" wrappingWidth="200.993408203125" />
       <Button fx:id="backButton" layoutX="53.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
-      <TextArea fx:id="meaningField" layoutX="207.0" layoutY="186.0" prefHeight="62.0" prefWidth="186.0" promptText="Meaning" />
+      <TextArea fx:id="meaningField" layoutX="207.0" layoutY="186.0" prefHeight="62.0" prefWidth="186.0" promptText="Meaning" style="-fx-wrap-text: true;" />
       <Text fx:id="paymentDetailsText" layoutX="224.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expense Details" textAlignment="CENTER" wrappingWidth="149.33333333333326">
          <font>
             <Font size="17.0" />

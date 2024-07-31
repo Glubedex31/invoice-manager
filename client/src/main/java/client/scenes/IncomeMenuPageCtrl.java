@@ -105,7 +105,7 @@ public class IncomeMenuPageCtrl implements Initializable {
      * Handles the create receipt button.
      */
     public void handleCreateReceipt() {
-
+        mainCtrl.showChooseInvoicePage();
     }
 
     /**

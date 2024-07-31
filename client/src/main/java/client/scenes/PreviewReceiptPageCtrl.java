@@ -3,7 +3,7 @@ package client.scenes;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
-import commons.Invoice;
+import commons.Receipt;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -19,25 +19,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class PreviewInvoicePageCtrl implements Initializable {
+public class PreviewReceiptPageCtrl implements Initializable {
     private final MainCtrl mainCtrl;
     private final ClientUtils clientUtils;
-    private Invoice invoice;
     private final ServerUtils serverUtils;
-
-//    @FXML
-//    private Button backButton;
+    private Receipt receipt;
     @FXML
     private Button saveButton;
-    @FXML
-    private Button saveButtonReceipt;
     @FXML
     private Button deleteButton;
     @FXML
     private Button editButton;
     @FXML
     private ScrollPane scrollPane;
-
 
     /**
      * Constructor.
@@ -46,7 +40,7 @@ public class PreviewInvoicePageCtrl implements Initializable {
      * @param serverUtils The server utils
      */
     @Inject
-    public PreviewInvoicePageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils,
+    public PreviewReceiptPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils,
                                   ServerUtils serverUtils) {
         this.mainCtrl = mainCtrl;
         this.clientUtils = clientUtils;
@@ -55,12 +49,12 @@ public class PreviewInvoicePageCtrl implements Initializable {
 
     /**
      * Initialize the controller.
-     * @param location The location
-     * @param resources The resources
+     * @param url The URL
+     * @param resourceBundle The resource bundle
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // TODO
     }
 
     /**
@@ -68,10 +62,10 @@ public class PreviewInvoicePageCtrl implements Initializable {
      */
     public void refresh() {
         updateLanguage();
-        if (invoice != null) {
+        if (receipt != null) {
             try {
-                File file = new File("src/main/resources/invoices/invoice_"
-                    + invoice.getId() + ".pdf");
+                File file = new File("src/main/resources/receipts/receipt_"
+                    + receipt.getId() + ".pdf");
                 clientUtils.loadPdf(file, scrollPane);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -79,33 +73,33 @@ public class PreviewInvoicePageCtrl implements Initializable {
         }
     }
 
+
+
     /**
      * Update the language.
      */
     public void updateLanguage() {
         Map<String, String> map = clientUtils.getLanguageMap();
 
-        //backButton.setText(map.get("settings_back"));
         saveButton.setText(map.get("settings_save"));
-        saveButtonReceipt.setText(map.get("preview_save_receipt"));
         deleteButton.setText(map.get("preview_delete"));
         editButton.setText(map.get("preview_edit"));
     }
 
     /**
-     * Gets the invoice.
-     * @return invoice The invoice
+     * Get the receipt.
+     * @return The receipt
      */
-    public Invoice getInvoice() {
-        return invoice;
+    public Receipt getReceipt() {
+        return receipt;
     }
 
     /**
-     * Sets the invoice.
-     * @param invoice The invoice
+     * Set the receipt.
+     * @param receipt The receipt
      */
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
     }
 
     /**
@@ -115,15 +109,6 @@ public class PreviewInvoicePageCtrl implements Initializable {
         mainCtrl.showIncomeMenuPage();
     }
 
-// A back button doesn't really make sense on this page
-
-//    /**
-//     * Handles the back button.
-//     */
-//    public void handleBack() {
-//        mainCtrl.showNewInvoicePage();
-//    }
-
     /**
      * Handles the delete button.
      */
@@ -132,10 +117,10 @@ public class PreviewInvoicePageCtrl implements Initializable {
 
         if (result) {
             try {
-                serverUtils.deleteInvoice(invoice.getId());
+                serverUtils.deleteReceipt(receipt.getId());
 
-                Path path = Paths.get("src/main/resources/invoices/invoice_"
-                    + invoice.getId() + ".pdf");
+                Path path = Paths.get("src/main/resources/receipts/receipt_"
+                    + receipt.getId() + ".pdf");
                 Files.delete(path);
 
                 showSuccess();
@@ -157,11 +142,11 @@ public class PreviewInvoicePageCtrl implements Initializable {
         ButtonType cancelButton = new ButtonType(map.get("preview_delete_cancel"));
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-            map.get("preview_delete_confirm_text"),
+            map.get("preview_delete_confirm_text_receipt"),
             deleteButton,
             cancelButton);
         alert.setTitle(map.get("preview_delete_confirm"));
-        alert.setHeaderText(map.get("preview_delete_confirm_header"));
+        alert.setHeaderText(map.get("preview_delete_confirm_header_receipt"));
 
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == deleteButton;
@@ -187,7 +172,7 @@ public class PreviewInvoicePageCtrl implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(map.get("preview_delete_error"));
         alert.setHeaderText(null);
-        alert.setContentText(map.get("preview_delete_error_text"));
+        alert.setContentText(map.get("preview_delete_error_text_receipt"));
         alert.showAndWait();
     }
 
@@ -195,13 +180,6 @@ public class PreviewInvoicePageCtrl implements Initializable {
      * Handles the edit button.
      */
     public void handleEdit() {
-        mainCtrl.showEditInvoicePage(invoice);
-    }
-
-    /**
-     * Handles the save receipt button.
-     */
-    public void handleSaveReceipt() {
-        //TODO: Implement save receipt
+        mainCtrl.showEditReceiptPage(receipt);
     }
 }

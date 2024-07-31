@@ -3,6 +3,7 @@ package server.api;
 import commons.Receipt;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import server.PdfGenerationService;
 import server.database.ReceiptRepository;
 
 import java.util.List;
@@ -11,14 +12,18 @@ import java.util.List;
 @RequestMapping("/api/receipts")
 public class ReceiptController {
     private final ReceiptRepository receiptRepository;
+    private final PdfGenerationService pdfGenerationService;
 
     /**
      * Constructor for the ReceiptController.
      *
      * @param receiptRepository the repository for receipts
+     * @param pdfGenerationService the service for generating PDFs
      */
-    public ReceiptController(ReceiptRepository receiptRepository) {
+    public ReceiptController(ReceiptRepository receiptRepository,
+                             PdfGenerationService pdfGenerationService) {
         this.receiptRepository = receiptRepository;
+        this.pdfGenerationService = pdfGenerationService;
     }
 
     /**
@@ -102,5 +107,28 @@ public class ReceiptController {
         //TODO: Implement this method
         return receipt == null || receipt.getInvoice() == null || receipt.getClient() == null
             || receipt.getProvider() == null;
+    }
+
+    /**
+     * Generate a PDF for a receipt.
+     *
+     * @param id the id of the receipt
+     * @return a response entity
+     */
+    @GetMapping("/generate-pdf/{id}")
+    public ResponseEntity<String> generateInvoicePdf(@PathVariable("id") Long id) {
+        try {
+            Receipt receipt = receiptRepository.findById(id).orElse(null);
+            if (receipt == null) {
+                return ResponseEntity.notFound().build();
+            }
+            pdfGenerationService.generateReceiptPdf(receipt);
+            System.out.println("PDF generated successfully for receipt ID: " + id);
+            return ResponseEntity.ok("PDF generated successfully for receipt ID: " + id);
+        } catch (Exception e) {
+            System.out.println("Failed to generate PDF: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Failed to generate PDF: "
+                + e.getMessage());
+        }
     }
 }

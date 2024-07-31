@@ -179,6 +179,7 @@ public class NewExpensePageCtrl implements Initializable {
      */
     private boolean isBlankOrInvalid() {
         return numberField.getText().isBlank() || meaningField.getText().isBlank() ||
+            numberField.getText().length() > 15 || meaningField.getText().length() > 500 ||
             (!cashCheckbox.isSelected() && !bankCheckbox.isSelected());
     }
 

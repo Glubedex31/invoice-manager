@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import commons.Client;
 import commons.Invoice;
 import commons.Provider;
+import commons.Receipt;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class NewInvoicePageCtrl implements Initializable {
+public class NewReceiptPageCtrl implements Initializable {
     private final MainCtrl mainCtrl;
     private final ClientUtils clientUtils;
     private final ServerUtils serverUtils;
@@ -28,7 +29,7 @@ public class NewInvoicePageCtrl implements Initializable {
     @FXML
     private Button saveButton;
     @FXML
-    private Text invoiceDetailsText;
+    private Text receiptDetailsText;
     @FXML
     private Text clientDetailsText;
     @FXML
@@ -56,6 +57,7 @@ public class NewInvoicePageCtrl implements Initializable {
 
     private Provider provider;
     private boolean isEdit;
+    private Receipt receipt;
     private Invoice invoice;
 
     /**
@@ -65,7 +67,8 @@ public class NewInvoicePageCtrl implements Initializable {
      * @param serverUtils The server utils
      */
     @Inject
-    public NewInvoicePageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils, ServerUtils serverUtils) {
+    public NewReceiptPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils,
+                              ServerUtils serverUtils) {
         this.mainCtrl = mainCtrl;
         this.clientUtils = clientUtils;
         this.serverUtils = serverUtils;
@@ -78,27 +81,42 @@ public class NewInvoicePageCtrl implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        // TODO
     }
 
     /**
      * Refresh the page.
-     * @param isEdit True if the invoice is being edited, false otherwise
+     * @param isEdit True if the receipt is being edited, false otherwise
+     * @param receipt The receipt
      * @param invoice The invoice
      */
-    public void refresh(boolean isEdit, Invoice invoice) {
+    public void refresh(boolean isEdit, Receipt receipt, Invoice invoice) {
         provider = serverUtils.getProviders().get(0);
         updateLanguage();
 
         this.isEdit = isEdit;
+        this.receipt = receipt;
         this.invoice = invoice;
 
         if(isEdit) {
+            numberField.setText(String.valueOf(receipt.getNumber()));
+            seriesField.setText(String.valueOf(receipt.getSeries()));
+            amountField.setText(String.valueOf(receipt.getAmount()));
+            dateField.setValue(receipt.getDate());
+            //meaningField.setText(receipt.getMeaning());
+            nameField.setText(receipt.getClient().getName());
+            cifField.setText(receipt.getClient().getCif());
+            addressField.setText(receipt.getClient().getAddress());
+            accountField.setText(receipt.getClient().getAccount());
+            bankField.setText(receipt.getClient().getBank());
+            clientNumberField.setText(receipt.getClient().getNumber());
+        }
+        else {
             numberField.setText(String.valueOf(invoice.getNumber()));
             seriesField.setText(String.valueOf(invoice.getSeries()));
             amountField.setText(String.valueOf(invoice.getAmount()));
             dateField.setValue(invoice.getDate());
-            meaningField.setText(invoice.getMeaning());
+            //meaningField.setText(receipt.getMeaning());
             nameField.setText(invoice.getClient().getName());
             cifField.setText(invoice.getClient().getCif());
             addressField.setText(invoice.getClient().getAddress());
@@ -114,22 +132,29 @@ public class NewInvoicePageCtrl implements Initializable {
     public void updateLanguage() {
         Map<String, String> map = clientUtils.getLanguageMap();
 
-        title.setText(map.get("new_invoice"));
+        title.setText(map.get("new_receipt"));
         backButton.setText(map.get("settings_back"));
         saveButton.setText(map.get("settings_save"));
-        invoiceDetailsText.setText(map.get("invoice_details"));
+        receiptDetailsText.setText(map.get("receipt_details"));
         clientDetailsText.setText(map.get("client_details"));
-        numberField.setPromptText(map.get("invoice_number"));
-        seriesField.setPromptText(map.get("invoice_series"));
-        amountField.setPromptText(map.get("invoice_amount"));
-        dateField.setPromptText(map.get("invoice_date"));
-        meaningField.setPromptText(map.get("invoice_meaning"));
+        numberField.setPromptText(map.get("receipt_number"));
+        seriesField.setPromptText(map.get("receipt_series"));
+        amountField.setPromptText(map.get("receipt_amount"));
+        dateField.setPromptText(map.get("receipt_date"));
+        //meaningField.setPromptText(map.get("invoice_meaning"));
         nameField.setPromptText(map.get("client_name"));
         cifField.setPromptText(map.get("client_cif"));
         addressField.setPromptText(map.get("client_address"));
         accountField.setPromptText(map.get("client_account"));
         bankField.setPromptText(map.get("client_bank"));
         clientNumberField.setPromptText(map.get("client_number"));
+    }
+
+    /**
+     * Handles the back button.
+     */
+    public void handleBack() {
+        mainCtrl.showChooseInvoicePage();
     }
 
     /**
@@ -158,25 +183,25 @@ public class NewInvoicePageCtrl implements Initializable {
      * Handles the save button for the edit case.
      */
     public void handleSaveEdit() {
-        invoice.setNumber(Long.parseLong(numberField.getText()));
-        invoice.setSeries(Long.parseLong(seriesField.getText()));
-        invoice.setAmount(Long.parseLong(amountField.getText()));
-        invoice.setDate(dateField.getValue());
-        invoice.setMeaning(meaningField.getText());
+        receipt.setNumber(Long.parseLong(numberField.getText()));
+        receipt.setSeries(Long.parseLong(seriesField.getText()));
+        receipt.setAmount(Long.parseLong(amountField.getText()));
+        receipt.setDate(dateField.getValue());
+        //receipt.setMeaning(meaningField.getText());
 
-        invoice.getClient().setName(nameField.getText());
-        invoice.getClient().setCif(cifField.getText());
-        invoice.getClient().setAddress(addressField.getText());
-        invoice.getClient().setAccount(accountField.getText());
-        invoice.getClient().setBank(bankField.getText());
-        invoice.getClient().setNumber(clientNumberField.getText());
+        receipt.getClient().setName(nameField.getText());
+        receipt.getClient().setCif(cifField.getText());
+        receipt.getClient().setAddress(addressField.getText());
+        receipt.getClient().setAccount(accountField.getText());
+        receipt.getClient().setBank(bankField.getText());
+        receipt.getClient().setNumber(clientNumberField.getText());
 
-        Invoice res1 = null;
+        Receipt res1 = null;
         Client res2 = null;
 
         try {
-            res2 = serverUtils.updateClient(invoice.getClient());
-            res1 = serverUtils.updateInvoice(invoice);
+            res2 = serverUtils.updateClient(receipt.getClient());
+            res1 = serverUtils.updateReceipt(receipt);
         } catch (Exception e) {
             showServerError();
             return;
@@ -187,8 +212,8 @@ public class NewInvoicePageCtrl implements Initializable {
         }
         else {
             showSuccess();
-            serverUtils.generateInvoicePdf(res1.getId());
-            mainCtrl.showPreviewInvoicePage(res1);
+            serverUtils.generateReceiptPdf(res1.getId());
+            mainCtrl.showPreviewReceiptPage(res1);
         }
     }
 
@@ -201,7 +226,7 @@ public class NewInvoicePageCtrl implements Initializable {
         long series = Long.parseLong(seriesField.getText());
         long amount = Long.parseLong(amountField.getText());
         LocalDate date = dateField.getValue();
-        String meaning = meaningField.getText();
+        //String meaning = meaningField.getText();
 
         String name = nameField.getText();
         String cif = cifField.getText();
@@ -210,16 +235,16 @@ public class NewInvoicePageCtrl implements Initializable {
         String bank = bankField.getText();
         String  clientNumber = clientNumberField.getText();
 
-        Invoice res1 = null;
+        Receipt res1 = null;
         Client res2 = null;
 
         try {
             Client client = new Client(name, cif, address, account, bank, clientNumber);
             res2 = serverUtils.addClient(client);
 
-            Invoice newInvoice = new Invoice(number, series, amount, date, res2,
-                provider, meaning, false);
-            res1 = serverUtils.addInvoice(newInvoice);
+            Receipt newReceipt = new Receipt(number, series, amount, date,
+                client, provider, invoice);
+            res1 = serverUtils.addReceipt(newReceipt);
         } catch (Exception e) {
             showServerError();
             return;
@@ -230,8 +255,8 @@ public class NewInvoicePageCtrl implements Initializable {
         }
         else {
             showSuccess();
-            serverUtils.generateInvoicePdf(res1.getId());
-            mainCtrl.showPreviewInvoicePage(res1);
+            serverUtils.generateReceiptPdf(res1.getId());
+            mainCtrl.showPreviewReceiptPage(res1);
         }
     }
 
@@ -244,10 +269,9 @@ public class NewInvoicePageCtrl implements Initializable {
             addressField.getText().isBlank() || accountField.getText().isBlank() ||
             bankField.getText().isBlank() || numberField.getText().isBlank()
             || seriesField.getText().isBlank() || amountField.getText().isBlank()
-            || dateField.getValue() == null || meaningField.getText().isBlank()
+            || dateField.getValue() == null || cifField.getText().length() > 100
             || clientNumberField.getText().isBlank() || nameField.getText().length() > 250
-            || cifField.getText().length() > 100 || meaningField.getText().length() > 500 ||
-            numberField.getText().length() > 15 || seriesField.getText().length() > 15 ||
+            || numberField.getText().length() > 15 || seriesField.getText().length() > 15 ||
             amountField.getText().length() > 15 || dateField.getValue().toString().length() > 50 ||
             addressField.getText().length() > 250 || accountField.getText().length() > 100 ||
             bankField.getText().length() > 100 || numberField.getText().length() > 100;
@@ -294,7 +318,7 @@ public class NewInvoicePageCtrl implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(map.get("settings_server_error"));
         alert.setHeaderText(null);
-        alert.setContentText(map.get("settings_server_error_text_invoice"));
+        alert.setContentText(map.get("settings_server_error_text_receipt"));
         alert.showAndWait();
     }
 
@@ -306,19 +330,7 @@ public class NewInvoicePageCtrl implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(map.get("settings_success"));
         alert.setHeaderText(null);
-        alert.setContentText(map.get("settings_success_text_invoice"));
+        alert.setContentText(map.get("settings_success_text_receipt"));
         alert.showAndWait();
-    }
-
-    /**
-     * Handles the back button.
-     */
-    public void handleBack() {
-        if(isEdit) {
-            mainCtrl.showPreviewInvoicePage(invoice);
-        }
-        else {
-            mainCtrl.showIncomeMenuPage();
-        }
     }
 }

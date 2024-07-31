@@ -29,6 +29,7 @@ public class InvoiceSummaryPageCtrl implements Initializable {
     private Button backButton;
     @FXML
     private ListView<Invoice> listView;
+    private boolean isOnReceiptMenu;
 
     /**
      * Constructor.
@@ -56,8 +57,10 @@ public class InvoiceSummaryPageCtrl implements Initializable {
 
     /**
      * Refresh the controller.
+     * @param isOnReceiptMenu Whether the user is on the receipt menu
      */
-    public void refresh() {
+    public void refresh(boolean isOnReceiptMenu) {
+        this.isOnReceiptMenu = isOnReceiptMenu;
         updateLanguage();
         loadInvoices();
         setupEventListView();
@@ -100,7 +103,11 @@ public class InvoiceSummaryPageCtrl implements Initializable {
                         clientUtils.getLanguageMap().get("nr") + " " + invoice.getNumber());
                 setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getClickCount() == 2 && !empty) {
-                        mainCtrl.showPreviewInvoicePage(invoice);
+                        if(!isOnReceiptMenu) {
+                            mainCtrl.showPreviewInvoicePage(invoice);
+                        } else {
+                            mainCtrl.showNewReceiptPage(invoice);
+                        }
                     }
                 });
             }
@@ -133,7 +140,11 @@ public class InvoiceSummaryPageCtrl implements Initializable {
     public void updateLanguage() {
         Map<String, String> map = clientUtils.getLanguageMap();
 
-        title.setText(map.get("invoice_summary"));
+        if(isOnReceiptMenu) {
+            title.setText(map.get("choose_invoice"));
+        } else {
+            title.setText(map.get("invoice_summary"));
+        }
         backButton.setText(map.get("settings_back"));
     }
 }

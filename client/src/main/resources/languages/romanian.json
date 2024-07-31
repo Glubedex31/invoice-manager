@@ -27,10 +27,12 @@
   "settings_server_error_text": "A aparut o eroare in timpul incercarii de a salva furnizorul. Va rugam sa incercati mai tarziu.",
   "settings_server_error_text_invoice": "A aparut o eroare in timpul incercarii de a salva factura. Va rugam sa incercati mai tarziu.",
   "settings_server_error_text_expense": "A aparut o eroare in timpul incercarii de a salva cheltuiala. Va rugam sa incercati mai tarziu.",
+  "settings_server_error_text_receipt": "A aparut o eroare in timpul incercarii de a salva chitanta. Va rugam sa incercati mai tarziu.",
   "settings_success": "Succes",
   "settings_success_text": "Furnizorul a fost salvat cu succes.",
   "settings_success_text_invoice": "Factura a fost salvata cu succes.",
   "settings_success_text_expense": "Cheltuiala a fost salvata cu succes.",
+  "settings_success_text_receipt": "Chitanta a fost salvata cu succes.",
 
   "income_menu": "Meniu Venit",
   "create_invoice": "Creeaza Factura",
@@ -67,11 +69,14 @@
   "preview_delete_error": "Eroare la stergere",
   "preview_delete_error_text": "A aparut o eroare in timpul incercarii de a sterge factura. Va rugam sa incercati mai tarziu.",
   "preview_delete_error_text_expense": "A aparut o eroare in timpul incercarii de a sterge cheltuiala. Va rugam sa incercati mai tarziu.",
+  "preview_delete_error_text_receipt": "A aparut o eroare in timpul incercarii de a sterge chitanta. Va rugam sa incercati mai tarziu.",
   "preview_delete_confirm": "Confirmare stergere",
   "preview_delete_confirm_text": "Sunteti sigur ca doriti sa stergeti aceasta factura?",
   "preview_delete_confirm_text_expense": "Sunteti sigur ca doriti sa stergeti aceasta cheltuiala?",
+  "preview_delete_confirm_text_receipt": "Sunteti sigur ca doriti sa stergeti aceasta chitanta?",
   "preview_delete_confirm_header": "Stergere factura",
   "preview_delete_confirm_header_expense": "Stergere cheltuiala",
+  "preview_delete_confirm_header_receipt": "Stergere chitanta",
   "preview_delete_cancel": "Anuleaza",
   "preview_delete_yes": "Da",
 
@@ -93,5 +98,14 @@
   "payment_details": "Detalii Cheltuiala",
 
   "preview_expense_meaning": "Scop",
-  "preview_expense_type": "Tip"
+  "preview_expense_type": "Tip",
+
+  "chose_invoice": "Alege factura",
+
+  "new_receipt": "Chitanta Noua",
+  "receipt_details": "Detalii Chitanta",
+  "receipt_number": "Numar Chitanta",
+  "receipt_series": "Serie Chitanta",
+  "receipt_amount": "Suma Chitanta",
+  "receipt_date": "Data Chitanta"
 }
