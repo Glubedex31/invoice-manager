@@ -14,15 +14,18 @@ public class Payment {
     private long id;
     private String meaning;
     private long number;
+    private boolean isBank;
 
     /**
      * Constructor for the Payment class.
      * @param meaning   The meaning of the payment.
      * @param number    The number of the payment.
+     * @param isBank    True if the payment is a bank payment, false otherwise.
      */
-    public Payment(String meaning, long number) {
+    public Payment(String meaning, long number, boolean isBank) {
         this.meaning = meaning;
         this.number = number;
+        this.isBank = isBank;
     }
 
     /**
@@ -73,7 +76,7 @@ public class Payment {
         if (this == object) return true;
         if (!(object instanceof Payment payment)) return false;
         return number == payment.number && Objects.equals(meaning, payment.meaning)
-            && id == payment.id;
+            && id == payment.id && isBank == payment.isBank;
     }
 
     /**
@@ -82,7 +85,7 @@ public class Payment {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(meaning, number, id);
+        return Objects.hash(meaning, number, id, isBank);
     }
 
     /**
@@ -95,6 +98,7 @@ public class Payment {
             "meaning='" + meaning + '\'' +
             ", number=" + number +
             ", id=" + id +
+            ", isBank=" + isBank +
             '}';
     }
 
@@ -112,5 +116,21 @@ public class Payment {
      */
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * Check if the payment is a bank payment.
+     * @return True if the payment is a bank payment, false otherwise.
+     */
+    public boolean isBank() {
+        return isBank;
+    }
+
+    /**
+     * Set the payment to be a bank payment.
+     * @param bank True if the payment is a bank payment, false otherwise.
+     */
+    public void setBank(boolean bank) {
+        isBank = bank;
     }
 }

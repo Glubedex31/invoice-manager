@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.NewExpensePageCtrl">
+   <children>
+      <Text fx:id="title" layoutX="199.0" layoutY="76.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="New Expense" textAlignment="CENTER" wrappingWidth="200.993408203125" />
+      <Button fx:id="backButton" layoutX="53.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
+      <TextArea fx:id="meaningField" layoutX="207.0" layoutY="186.0" prefHeight="62.0" prefWidth="186.0" promptText="Meaning" style="-fx-wrap-text: true;" />
+      <Text fx:id="paymentDetailsText" layoutX="224.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expense Details" textAlignment="CENTER" wrappingWidth="149.33333333333326">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextField fx:id="numberField" layoutX="225.0" layoutY="140.0" promptText="Number" />
+      <Button fx:id="saveButton" layoutX="264.0" layoutY="326.0" onAction="#handleSave" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #4CAF50; -fx-text-fill: #ffffff; -fx-border-radius: 5;" text="Save" />
+      <CheckBox fx:id="bankCheckbox" layoutX="269.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleCheckbox" prefHeight="17.0" prefWidth="59.0" text="Bank" textAlignment="CENTER" />
+      <CheckBox fx:id="cashCheckbox" layoutX="269.0" layoutY="290.0" mnemonicParsing="false" onAction="#handleCheckbox" prefHeight="17.0" prefWidth="70.0" text="Cash" />
+   </children>
+</AnchorPane>

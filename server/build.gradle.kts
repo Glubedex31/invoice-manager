@@ -27,6 +27,10 @@ dependencies {
 
     implementation(project(":commons"))
 
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:3.3.1")
+    implementation("com.itextpdf:itext7-core:7.1.9")
+    implementation("com.itextpdf:html2pdf:3.0.3")
+
     runtimeOnly("com.h2database:h2:1.4.200")
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))

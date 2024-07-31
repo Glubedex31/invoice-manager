@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.PaymentMenuPageCtrl">
+   <children>
+      <Button fx:id="backButton" layoutX="43.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
+      <Text fx:id="title" layoutX="222.0" layoutY="85.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Expenses Menu" textAlignment="CENTER" wrappingWidth="195.3853759765625" />
+      <Button fx:id="createPaymentButton" layoutX="70.0" layoutY="120.0" onAction="#handleCreatePayment" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Create Expense" />
+      <Button fx:id="paymentSummaryButton" layoutX="247.0" layoutY="120.0" onAction="#handlePaymentSummary" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-font-size: 16px;" text="Expenses Summary" />
+   </children>
+</AnchorPane>

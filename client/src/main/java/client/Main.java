@@ -1,13 +1,10 @@
 package client;
 
-import client.scenes.IncomeMenuPageCtrl;
+import client.scenes.*;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import client.scenes.MainCtrl;
-import client.scenes.SettingsPageCtrl;
-import client.scenes.StartPageCtrl;
 import client.utils.ClientUtils;
 import client.utils.ConfigUtils;
 
@@ -58,12 +55,38 @@ public class Main extends Application {
         var startPage = FXML.load(StartPageCtrl.class, "scenes", "StartPage.fxml");
         var settingsPage = FXML.load(SettingsPageCtrl.class, "scenes", "SettingsPage.fxml");
         var incomeMenuPage = FXML.load(IncomeMenuPageCtrl.class, "scenes", "IncomeMenuPage.fxml");
+        var newInvoicePage = FXML.load(NewInvoicePageCtrl.class, "scenes", "NewInvoicePage.fxml");
+        var previewInvoicePage = FXML.load(PreviewInvoicePageCtrl.class,
+            "scenes", "PreviewInvoicePage.fxml");
+        var invoiceSummaryPage = FXML.load(InvoiceSummaryPageCtrl.class,
+            "scenes", "InvoiceSummaryPage.fxml");
+        var paymentMenuPage = FXML.load(PaymentMenuPageCtrl.class,
+            "scenes", "PaymentMenuPage.fxml");
+        var newExpensePage = FXML.load(NewExpensePageCtrl.class,
+            "scenes", "NewExpensePage.fxml");
+        var expenseSummaryPage = FXML.load(ExpenseSummaryPageCtrl.class,
+            "scenes", "ExpenseSummaryPage.fxml");
+        var previewExpensePage = FXML.load(PreviewExpensePageCtrl.class,
+            "scenes", "PreviewExpensePage.fxml");
+        var newReceiptPage = FXML.load(NewReceiptPageCtrl.class,
+            "scenes", "NewReceiptPage.fxml");
+        var previewReceiptPage = FXML.load(PreviewReceiptPageCtrl.class,
+            "scenes", "PreviewReceiptPage.fxml");
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage,
             startPage,
             settingsPage,
-            incomeMenuPage);
+            incomeMenuPage,
+            newInvoicePage,
+            previewInvoicePage,
+            invoiceSummaryPage,
+            paymentMenuPage,
+            newExpensePage,
+            expenseSummaryPage,
+            previewExpensePage,
+            newReceiptPage,
+            previewReceiptPage);
 
         primaryStage.setOnCloseRequest(e -> {
             configUtils.writeLanguage(clientUtils.getLanguage());

@@ -69,7 +69,7 @@ public class StartPageCtrl implements Initializable {
         if(serverUtils.getProviders().isEmpty()) {
             showProfileError();
         } else {
-            //mainCtrl.showExpensesPage();
+            mainCtrl.showPaymentMenuPage();
         }
     }
 

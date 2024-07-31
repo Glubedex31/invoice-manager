@@ -69,7 +69,7 @@ public class ProviderController {
      * @return the deleted provider
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Provider> deleteProvider(@PathVariable long id) {
+    public ResponseEntity<Provider> deleteProvider(@PathVariable("id") long id) {
         if (!providerRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

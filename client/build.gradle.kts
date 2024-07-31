@@ -21,7 +21,8 @@ javafx {
     version = "21.0.2"
     modules = listOf(
             "javafx.controls",
-            "javafx.fxml"
+            "javafx.fxml",
+            "javafx.swing"
     )
 }
 
@@ -42,10 +43,16 @@ dependencies {
     implementation("org.openjfx:javafx-controls:21.0.2")
     implementation("org.openjfx:javafx-fxml:21.0.2")
 
+    implementation("org.apache.pdfbox:pdfbox:2.0.24")
+
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3")
+
+
     implementation(project(":commons"))
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.mockito:mockito-core:4.5.1")
 }
 
 tasks.test {
