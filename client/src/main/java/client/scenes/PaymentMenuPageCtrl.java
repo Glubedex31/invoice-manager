@@ -80,7 +80,7 @@ public class PaymentMenuPageCtrl implements Initializable {
      * Handles the payment summary button.
      */
     public void handlePaymentSummary() {
-        //mainCtrl.showPaymentSummaryPage();
+        mainCtrl.showExpenseSummaryPage();
     }
 
     /**

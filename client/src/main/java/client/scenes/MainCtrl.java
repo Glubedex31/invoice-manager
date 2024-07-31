@@ -2,6 +2,7 @@ package client.scenes;
 
 import com.google.inject.Inject;
 import commons.Invoice;
+import commons.Payment;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -27,6 +28,10 @@ public class MainCtrl {
     private Scene paymentMenuPage;
     private NewExpensePageCtrl newExpensePageCtrl;
     private Scene newExpensePage;
+    private ExpenseSummaryPageCtrl expenseSummaryPageCtrl;
+    private Scene expenseSummaryPage;
+    private PreviewExpensePageCtrl previewExpensePageCtrl;
+    private Scene previewExpensePage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -43,6 +48,8 @@ public class MainCtrl {
      * @param invoiceSummaryPage The invoice summary page
      * @param paymentMenuPage The payment menu page
      * @param newExpensePage The new expense page
+     * @param expenseSummaryPage The expense summary page
+     * @param previewExpensePage The preview expense page
      */
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
@@ -52,7 +59,9 @@ public class MainCtrl {
                            Pair<PreviewInvoicePageCtrl, Parent> previewInvoicePage,
                            Pair<InvoiceSummaryPageCtrl, Parent> invoiceSummaryPage,
                            Pair<PaymentMenuPageCtrl, Parent> paymentMenuPage,
-                           Pair<NewExpensePageCtrl, Parent> newExpensePage) {
+                           Pair<NewExpensePageCtrl, Parent> newExpensePage,
+                           Pair<ExpenseSummaryPageCtrl, Parent> expenseSummaryPage,
+                           Pair<PreviewExpensePageCtrl, Parent> previewExpensePage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -78,6 +87,12 @@ public class MainCtrl {
 
         this.newExpensePageCtrl = newExpensePage.getKey();
         this.newExpensePage = new Scene(newExpensePage.getValue());
+
+        this.expenseSummaryPageCtrl = expenseSummaryPage.getKey();
+        this.expenseSummaryPage = new Scene(expenseSummaryPage.getValue());
+
+        this.previewExpensePageCtrl = previewExpensePage.getKey();
+        this.previewExpensePage = new Scene(previewExpensePage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -176,5 +191,35 @@ public class MainCtrl {
         primaryStage.setTitle("New Expense Page");
         primaryStage.setScene(newExpensePage);
         newExpensePageCtrl.refresh(false, null);
+    }
+
+    /**
+     * Show the edit expense page.
+     * @param payment The expense to edit
+     */
+    public void showEditExpensePage(Payment payment) {
+        primaryStage.setTitle("Edit Expense Page");
+        primaryStage.setScene(newExpensePage);
+        newExpensePageCtrl.refresh(true, payment);
+    }
+
+    /**
+     * Show the preview expense page.
+     * @param payment The expense to preview
+     */
+    public void showPreviewExpensePage(Payment payment) {
+        primaryStage.setTitle("Preview Expense Page");
+        primaryStage.setScene(previewExpensePage);
+        previewExpensePageCtrl.setPayment(payment);
+        previewExpensePageCtrl.refresh();
+    }
+
+    /**
+     * Show the expense summary page.
+     */
+    public void showExpenseSummaryPage() {
+        primaryStage.setTitle("Expense Summary Page");
+        primaryStage.setScene(expenseSummaryPage);
+        expenseSummaryPageCtrl.refresh();
     }
 }

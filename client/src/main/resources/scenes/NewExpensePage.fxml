@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.NewExpensePageCtrl">
    <children>
-      <Text fx:id="title" layoutX="223.0" layoutY="75.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="New Expense" textAlignment="CENTER" wrappingWidth="154.3267822265625" />
+      <Text fx:id="title" layoutX="199.0" layoutY="76.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="New Expense" textAlignment="CENTER" wrappingWidth="200.993408203125" />
       <Button fx:id="backButton" layoutX="53.0" layoutY="54.0" mnemonicParsing="false" onAction="#handleBack" text="Back" />
       <TextArea fx:id="meaningField" layoutX="207.0" layoutY="186.0" prefHeight="62.0" prefWidth="186.0" promptText="Meaning" />
       <Text fx:id="paymentDetailsText" layoutX="224.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expense Details" textAlignment="CENTER" wrappingWidth="149.33333333333326">

@@ -90,8 +90,8 @@ public class NewExpensePageCtrl implements Initializable {
         title.setText(map.get("new_expense"));
         backButton.setText(map.get("settings_back"));
         saveButton.setText(map.get("settings_save"));
-        numberField.setPromptText(map.get("invoice_number"));
-        meaningField.setPromptText(map.get("invoice_meaning"));
+        numberField.setPromptText(map.get("settings_number"));
+        meaningField.setPromptText(map.get("preview_expense_meaning"));
         bankCheckbox.setText(map.get("expense_bank"));
         cashCheckbox.setText(map.get("expense_cash"));
         paymentDetailsText.setText(map.get("payment_details"));
@@ -141,7 +141,7 @@ public class NewExpensePageCtrl implements Initializable {
         }
         else {
             showSuccess();
-            //mainCtrl.showPreviewExpensePage(res);
+            mainCtrl.showPreviewExpensePage(res);
         }
     }
 
@@ -169,7 +169,7 @@ public class NewExpensePageCtrl implements Initializable {
         }
         else {
             showSuccess();
-            //mainCtrl.showPreviewExpensePage(res);
+            mainCtrl.showPreviewExpensePage(res);
         }
     }
 
@@ -178,7 +178,7 @@ public class NewExpensePageCtrl implements Initializable {
      * @return True if the fields are blank or invalid, false otherwise
      */
     private boolean isBlankOrInvalid() {
-        return numberField.getText().isBlank() && meaningField.getText().isBlank() &&
+        return numberField.getText().isBlank() || meaningField.getText().isBlank() ||
             (!cashCheckbox.isSelected() && !bankCheckbox.isSelected());
     }
 
@@ -243,7 +243,7 @@ public class NewExpensePageCtrl implements Initializable {
      */
     public void handleBack() {
         if(isEdit) {
-            //mainCtrl.showPreviewExpensePage(payment);
+            mainCtrl.showPreviewExpensePage(payment);
         }
         else {
             mainCtrl.showPaymentMenuPage();
@@ -253,8 +253,7 @@ public class NewExpensePageCtrl implements Initializable {
     /**
      * Handles the checkbox.
      */
-    @FXML
-    private void handleCheckbox() {
+    public void handleCheckbox() {
         if (cashCheckbox.isSelected() && bankCheckbox.isSelected()) {
             if (cashCheckbox.isFocused()) {
                 bankCheckbox.setSelected(false);

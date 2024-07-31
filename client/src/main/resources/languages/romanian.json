@@ -26,6 +26,7 @@
   "settings_server_error": "Eroare de server",
   "settings_server_error_text": "A aparut o eroare in timpul incercarii de a salva furnizorul. Va rugam sa incercati mai tarziu.",
   "settings_server_error_text_invoice": "A aparut o eroare in timpul incercarii de a salva factura. Va rugam sa incercati mai tarziu.",
+  "settings_server_error_text_expense": "A aparut o eroare in timpul incercarii de a salva cheltuiala. Va rugam sa incercati mai tarziu.",
   "settings_success": "Succes",
   "settings_success_text": "Furnizorul a fost salvat cu succes.",
   "settings_success_text_invoice": "Factura a fost salvata cu succes.",
@@ -62,11 +63,15 @@
   "preview_edit": "Editeaza",
   "preview_delete_success": "Stergere cu succes",
   "preview_delete_success_text": "Factura a fost stearsa cu succes.",
+  "preview_delete_success_text_expense": "Cheltuiala a fost stearsa cu succes.",
   "preview_delete_error": "Eroare la stergere",
   "preview_delete_error_text": "A aparut o eroare in timpul incercarii de a sterge factura. Va rugam sa incercati mai tarziu.",
+  "preview_delete_error_text_expense": "A aparut o eroare in timpul incercarii de a sterge cheltuiala. Va rugam sa incercati mai tarziu.",
   "preview_delete_confirm": "Confirmare stergere",
   "preview_delete_confirm_text": "Sunteti sigur ca doriti sa stergeti aceasta factura?",
+  "preview_delete_confirm_text_expense": "Sunteti sigur ca doriti sa stergeti aceasta cheltuiala?",
   "preview_delete_confirm_header": "Stergere factura",
+  "preview_delete_confirm_header_expense": "Stergere cheltuiala",
   "preview_delete_cancel": "Anuleaza",
   "preview_delete_yes": "Da",
 
@@ -74,6 +79,8 @@
   "summary_load_error_text": "A aparut o eroare in timpul incercarii de a incarca datele. Va rugam sa incercati mai tarziu.",
 
   "invoice": "Factura",
+  "expense": "Cheltuiala",
+  "receipt": "Chitanta",
   "nr": "Nr.",
 
   "payment_menu": "Meniu Cheltuieli",
@@ -83,5 +90,8 @@
   "new_expense": "Cheltuiala Noua",
   "expense_cash": "Casierie",
   "expense_bank": "Banca",
-  "payment_details": "Detalii Cheltuiala"
+  "payment_details": "Detalii Cheltuiala",
+
+  "preview_expense_meaning": "Scop",
+  "preview_expense_type": "Tip"
 }

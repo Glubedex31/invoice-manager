@@ -64,6 +64,10 @@ public class Main extends Application {
             "scenes", "PaymentMenuPage.fxml");
         var newExpensePage = FXML.load(NewExpensePageCtrl.class,
             "scenes", "NewExpensePage.fxml");
+        var expenseSummaryPage = FXML.load(ExpenseSummaryPageCtrl.class,
+            "scenes", "ExpenseSummaryPage.fxml");
+        var previewExpensePage = FXML.load(PreviewExpensePageCtrl.class,
+            "scenes", "PreviewExpensePage.fxml");
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage,
@@ -74,7 +78,9 @@ public class Main extends Application {
             previewInvoicePage,
             invoiceSummaryPage,
             paymentMenuPage,
-            newExpensePage);
+            newExpensePage,
+            expenseSummaryPage,
+            previewExpensePage);
 
         primaryStage.setOnCloseRequest(e -> {
             configUtils.writeLanguage(clientUtils.getLanguage());
