@@ -117,6 +117,8 @@ public class PreviewReceiptPageCtrl implements Initializable {
 
         if (result) {
             try {
+                receipt.getInvoice().setHasBeenPaid(false);
+                serverUtils.updateInvoice(receipt.getInvoice());
                 serverUtils.deleteReceipt(receipt.getId());
 
                 Path path = Paths.get("src/main/resources/receipts/receipt_"

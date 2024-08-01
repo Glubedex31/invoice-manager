@@ -3,7 +3,9 @@ package client.scenes;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
+import commons.Client;
 import commons.Invoice;
+import commons.Receipt;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -202,6 +204,49 @@ public class PreviewInvoicePageCtrl implements Initializable {
      * Handles the save receipt button.
      */
     public void handleSaveReceipt() {
-        //TODO: Implement save receipt
+        Receipt receipt = null;
+
+        try {
+            receipt = new Receipt(invoice);
+            receipt = serverUtils.addReceipt(receipt);
+        } catch (Exception e) {
+            showSuccessReceipt();
+            return;
+        }
+
+        if(receipt == null) {
+            showServerErrorReceipt();
+        }
+        else {
+            showSuccess();
+            serverUtils.generateReceiptPdf(receipt.getId());
+            invoice.setHasBeenPaid(true);
+            serverUtils.updateInvoice(receipt.getInvoice());
+            mainCtrl.showPreviewReceiptPage(receipt);
+        }
+    }
+
+    /**
+     * Shows a server error message.
+     */
+    private void showServerErrorReceipt() {
+        Map<String, String> map = clientUtils.getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(map.get("settings_server_error"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("settings_server_error_text_receipt"));
+        alert.showAndWait();
+    }
+
+    /**
+     * Shows a success message.
+     */
+    private void showSuccessReceipt() {
+        Map<String, String> map = clientUtils.getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(map.get("settings_success"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("settings_success_text_receipt"));
+        alert.showAndWait();
     }
 }

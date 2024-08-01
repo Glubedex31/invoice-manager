@@ -34,6 +34,11 @@ public class Receipt extends Document{
     public Receipt() {
     }
 
+    public Receipt(Invoice invoice) {
+        super(invoice.getNumber(), invoice.getSeries(), invoice.getAmount(), invoice.getDate(), invoice.getClient(), invoice.getProvider());
+        this.invoice = invoice;
+    }
+
     /**
      * Get the invoice for the receipt.
      * @return The invoice for the receipt.

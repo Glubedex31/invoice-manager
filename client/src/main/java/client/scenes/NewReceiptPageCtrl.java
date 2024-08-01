@@ -3,10 +3,7 @@ package client.scenes;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
-import commons.Client;
-import commons.Invoice;
-import commons.Provider;
-import commons.Receipt;
+import commons.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -99,31 +96,25 @@ public class NewReceiptPageCtrl implements Initializable {
         this.invoice = invoice;
 
         if(isEdit) {
-            numberField.setText(String.valueOf(receipt.getNumber()));
-            seriesField.setText(String.valueOf(receipt.getSeries()));
-            amountField.setText(String.valueOf(receipt.getAmount()));
-            dateField.setValue(receipt.getDate());
-            //meaningField.setText(receipt.getMeaning());
-            nameField.setText(receipt.getClient().getName());
-            cifField.setText(receipt.getClient().getCif());
-            addressField.setText(receipt.getClient().getAddress());
-            accountField.setText(receipt.getClient().getAccount());
-            bankField.setText(receipt.getClient().getBank());
-            clientNumberField.setText(receipt.getClient().getNumber());
+            setFields(receipt);
         }
         else {
-            numberField.setText(String.valueOf(invoice.getNumber()));
-            seriesField.setText(String.valueOf(invoice.getSeries()));
-            amountField.setText(String.valueOf(invoice.getAmount()));
-            dateField.setValue(invoice.getDate());
-            //meaningField.setText(receipt.getMeaning());
-            nameField.setText(invoice.getClient().getName());
-            cifField.setText(invoice.getClient().getCif());
-            addressField.setText(invoice.getClient().getAddress());
-            accountField.setText(invoice.getClient().getAccount());
-            bankField.setText(invoice.getClient().getBank());
-            clientNumberField.setText(invoice.getClient().getNumber());
+            setFields(invoice);
         }
+    }
+
+    public void setFields(Document document) {
+        numberField.setText(String.valueOf(document.getNumber()));
+        seriesField.setText(String.valueOf(document.getSeries()));
+        amountField.setText(String.valueOf(document.getAmount()));
+        dateField.setValue(document.getDate());
+        //meaningField.setText(receipt.getMeaning());
+        nameField.setText(document.getClient().getName());
+        cifField.setText(document.getClient().getCif());
+        addressField.setText(document.getClient().getAddress());
+        accountField.setText(document.getClient().getAccount());
+        bankField.setText(document.getClient().getBank());
+        clientNumberField.setText(document.getClient().getNumber());
     }
 
     /**
@@ -213,6 +204,8 @@ public class NewReceiptPageCtrl implements Initializable {
         else {
             showSuccess();
             serverUtils.generateReceiptPdf(res1.getId());
+            invoice.setHasBeenPaid(true);
+            serverUtils.updateInvoice(receipt.getInvoice());
             mainCtrl.showPreviewReceiptPage(res1);
         }
     }
@@ -256,6 +249,8 @@ public class NewReceiptPageCtrl implements Initializable {
         else {
             showSuccess();
             serverUtils.generateReceiptPdf(res1.getId());
+            invoice.setHasBeenPaid(true);
+            serverUtils.updateInvoice(receipt.getInvoice());
             mainCtrl.showPreviewReceiptPage(res1);
         }
     }

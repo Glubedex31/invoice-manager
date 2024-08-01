@@ -37,6 +37,8 @@ public class MainCtrl {
     private Scene newReceiptPage;
     private PreviewReceiptPageCtrl previewReceiptPageCtrl;
     private Scene previewReceiptPage;
+    private ReceiptSummaryPageCtrl receiptSummaryPageCtrl;
+    private Scene receiptSummaryPage;
     @Inject
     private ClientUtils clientUtils;
     @Inject
@@ -57,6 +59,7 @@ public class MainCtrl {
      * @param previewExpensePage The preview expense page
      * @param newReceiptPage The new receipt page
      * @param previewReceiptPage The preview receipt page
+     * @param receiptSummaryPage The receipt summary page
      */
     public void initialize(Stage primaryStage,
                            Pair<StartPageCtrl, Parent> startPage,
@@ -70,7 +73,8 @@ public class MainCtrl {
                            Pair<ExpenseSummaryPageCtrl, Parent> expenseSummaryPage,
                            Pair<PreviewExpensePageCtrl, Parent> previewExpensePage,
                            Pair<NewReceiptPageCtrl, Parent> newReceiptPage,
-                           Pair<PreviewReceiptPageCtrl, Parent> previewReceiptPage) {
+                           Pair<PreviewReceiptPageCtrl, Parent> previewReceiptPage,
+                           Pair<ReceiptSummaryPageCtrl, Parent> receiptSummaryPage) {
         this.primaryStage = primaryStage;
 
         this.startPageCtrl = startPage.getKey();
@@ -108,6 +112,9 @@ public class MainCtrl {
 
         this.previewReceiptPageCtrl = previewReceiptPage.getKey();
         this.previewReceiptPage = new Scene(previewReceiptPage.getValue());
+
+        this.receiptSummaryPageCtrl = receiptSummaryPage.getKey();
+        this.receiptSummaryPage = new Scene(receiptSummaryPage.getValue());
 
         clientUtils.setLanguage(configUtils.getLanguage());
 
@@ -276,5 +283,14 @@ public class MainCtrl {
         primaryStage.setScene(previewReceiptPage);
         previewReceiptPageCtrl.setReceipt(receipt);
         previewReceiptPageCtrl.refresh();
+    }
+
+    /**
+     * Show the receipt summary page.
+     */
+    public void showReceiptSummaryPage() {
+        primaryStage.setTitle("Receipt Summary Page");
+        primaryStage.setScene(receiptSummaryPage);
+        receiptSummaryPageCtrl.refresh();
     }
 }
