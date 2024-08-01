@@ -162,7 +162,7 @@ public class PreviewReceiptPageCtrl implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(map.get("preview_delete_success"));
         alert.setHeaderText(null);
-        alert.setContentText(map.get("preview_delete_success_text"));
+        alert.setContentText(map.get("preview_delete_success_text_receipt"));
         alert.showAndWait();
     }
 

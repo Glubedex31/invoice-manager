@@ -34,8 +34,13 @@ public class Receipt extends Document{
     public Receipt() {
     }
 
+    /**
+     * Constructor for the Receipt class.
+     * @param invoice The invoice for the receipt.
+     */
     public Receipt(Invoice invoice) {
-        super(invoice.getNumber(), invoice.getSeries(), invoice.getAmount(), invoice.getDate(), invoice.getClient(), invoice.getProvider());
+        super(invoice.getNumber(), invoice.getSeries(), invoice.getAmount(),
+            invoice.getDate(), invoice.getClient(), invoice.getProvider());
         this.invoice = invoice;
     }
 

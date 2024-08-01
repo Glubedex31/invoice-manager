@@ -3,7 +3,6 @@ package client.scenes;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
-import commons.Invoice;
 import commons.Receipt;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
@@ -71,8 +70,7 @@ public class ReceiptSummaryPageCtrl implements Initializable {
         Task<List<Receipt>> task = new Task<>() {
             @Override
             protected List<Receipt> call() throws Exception {
-                List<Receipt> receipts = serverUtils.getReceipts();
-                return receipts;
+                return serverUtils.getReceipts();
             }
         };
 
@@ -81,7 +79,7 @@ public class ReceiptSummaryPageCtrl implements Initializable {
         task.setOnFailed(invoice -> {
             Throwable cause = task.getException();
             cause.printStackTrace();
-            showAlert("summary_load_error_title", clientUtils.getLanguageMap()
+            showAlert(clientUtils.getLanguageMap()
                 .get("summary_load_error_text"));
             System.out.println(cause.getMessage());
         });
@@ -110,12 +108,12 @@ public class ReceiptSummaryPageCtrl implements Initializable {
 
     /**
      * Show an alert.
-     * @param title The title
+     *
      * @param message The message
      */
-    private void showAlert(String title, String message) {
+    private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
+        alert.setTitle("summary_load_error_title");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

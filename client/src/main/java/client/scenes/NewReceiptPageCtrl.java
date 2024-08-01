@@ -38,8 +38,6 @@ public class NewReceiptPageCtrl implements Initializable {
     @FXML
     private DatePicker dateField;
     @FXML
-    private TextArea meaningField;
-    @FXML
     private TextField nameField;
     @FXML
     private TextField cifField;
@@ -103,19 +101,21 @@ public class NewReceiptPageCtrl implements Initializable {
         }
     }
 
+    /**
+     * Set the fields for the invoice.
+     * @param document The document
+     */
     public void setFields(Document document) {
         numberField.setText(String.valueOf(document.getNumber()));
         seriesField.setText(String.valueOf(document.getSeries()));
         amountField.setText(String.valueOf(document.getAmount()));
         dateField.setValue(document.getDate());
         //meaningField.setText(receipt.getMeaning());
-        nameField.setText(document.getClient().getName());
-        cifField.setText(document.getClient().getCif());
-        addressField.setText(document.getClient().getAddress());
-        accountField.setText(document.getClient().getAccount());
-        bankField.setText(document.getClient().getBank());
-        clientNumberField.setText(document.getClient().getNumber());
+        clientUtils.setClientFields(document, nameField, cifField,
+            addressField, accountField, bankField, clientNumberField);
     }
+
+
 
     /**
      * Update the language.
@@ -133,12 +133,8 @@ public class NewReceiptPageCtrl implements Initializable {
         amountField.setPromptText(map.get("receipt_amount"));
         dateField.setPromptText(map.get("receipt_date"));
         //meaningField.setPromptText(map.get("invoice_meaning"));
-        nameField.setPromptText(map.get("client_name"));
-        cifField.setPromptText(map.get("client_cif"));
-        addressField.setPromptText(map.get("client_address"));
-        accountField.setPromptText(map.get("client_account"));
-        bankField.setPromptText(map.get("client_bank"));
-        clientNumberField.setPromptText(map.get("client_number"));
+        clientUtils.setPromptClientFields(map, nameField, cifField, addressField,
+            accountField, bankField, clientNumberField);
     }
 
     /**
@@ -153,12 +149,12 @@ public class NewReceiptPageCtrl implements Initializable {
      */
     public void handleSave() {
         if(isBlankOrInvalid()) {
-            showError();
+            clientUtils.showError();
             return;
         }
 
         if(!hasDigits()) {
-            showDigitsError();
+            clientUtils.showDigitsError();
             return;
         }
 
@@ -180,29 +176,34 @@ public class NewReceiptPageCtrl implements Initializable {
         receipt.setDate(dateField.getValue());
         //receipt.setMeaning(meaningField.getText());
 
-        receipt.getClient().setName(nameField.getText());
-        receipt.getClient().setCif(cifField.getText());
-        receipt.getClient().setAddress(addressField.getText());
-        receipt.getClient().setAccount(accountField.getText());
-        receipt.getClient().setBank(bankField.getText());
-        receipt.getClient().setNumber(clientNumberField.getText());
+        clientUtils.setClientDetails(receipt.getClient(), nameField, cifField, addressField,
+            accountField, bankField, clientNumberField);
 
-        Receipt res1 = null;
-        Client res2 = null;
+        Receipt res1;
+        Client res2;
 
         try {
             res2 = serverUtils.updateClient(receipt.getClient());
             res1 = serverUtils.updateReceipt(receipt);
         } catch (Exception e) {
-            showServerError();
+            clientUtils.showServerError();
             return;
         }
 
+        validateRes(res1, res2);
+    }
+
+    /**
+     * Validates the receipt and client.
+     * @param res1 The receipt
+     * @param res2 The client
+     */
+    public void validateRes(Receipt res1, Client res2) {
         if(res1 == null || res2 == null) {
-            showServerError();
+            clientUtils.showServerError();
         }
         else {
-            showSuccess();
+            clientUtils.showSuccessReceipt();
             serverUtils.generateReceiptPdf(res1.getId());
             invoice.setHasBeenPaid(true);
             serverUtils.updateInvoice(receipt.getInvoice());
@@ -228,8 +229,8 @@ public class NewReceiptPageCtrl implements Initializable {
         String bank = bankField.getText();
         String  clientNumber = clientNumberField.getText();
 
-        Receipt res1 = null;
-        Client res2 = null;
+        Receipt res1;
+        Client res2;
 
         try {
             Client client = new Client(name, cif, address, account, bank, clientNumber);
@@ -239,20 +240,11 @@ public class NewReceiptPageCtrl implements Initializable {
                 client, provider, invoice);
             res1 = serverUtils.addReceipt(newReceipt);
         } catch (Exception e) {
-            showServerError();
+            clientUtils.showServerError();
             return;
         }
 
-        if(res1 == null || res2 == null) {
-            showServerError();
-        }
-        else {
-            showSuccess();
-            serverUtils.generateReceiptPdf(res1.getId());
-            invoice.setHasBeenPaid(true);
-            serverUtils.updateInvoice(receipt.getInvoice());
-            mainCtrl.showPreviewReceiptPage(res1);
-        }
+        validateRes(res1, res2);
     }
 
     /**
@@ -279,53 +271,5 @@ public class NewReceiptPageCtrl implements Initializable {
     private boolean hasDigits() {
         return numberField.getText().matches("[0-9]+") && seriesField.getText().matches("[0-9]+") &&
             amountField.getText().matches("[0-9]+");
-    }
-
-    /**
-     * Shows an error message.
-     */
-    private void showError() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(map.get("validation_error"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("validation_error_text"));
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows an error message.
-     */
-    private void showDigitsError() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(map.get("digits_error"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("digits_error_text"));
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows a server error message.
-     */
-    private void showServerError() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(map.get("settings_server_error"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("settings_server_error_text_receipt"));
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows a success message.
-     */
-    private void showSuccess() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(map.get("settings_success"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("settings_success_text_receipt"));
-        alert.showAndWait();
     }
 }

@@ -3,7 +3,6 @@ package client.scenes;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
-import commons.Client;
 import commons.Invoice;
 import commons.Receipt;
 import javafx.fxml.FXML;
@@ -27,8 +26,6 @@ public class PreviewInvoicePageCtrl implements Initializable {
     private Invoice invoice;
     private final ServerUtils serverUtils;
 
-//    @FXML
-//    private Button backButton;
     @FXML
     private Button saveButton;
     @FXML
@@ -117,15 +114,6 @@ public class PreviewInvoicePageCtrl implements Initializable {
         mainCtrl.showIncomeMenuPage();
     }
 
-// A back button doesn't really make sense on this page
-
-//    /**
-//     * Handles the back button.
-//     */
-//    public void handleBack() {
-//        mainCtrl.showNewInvoicePage();
-//    }
-
     /**
      * Handles the delete button.
      */
@@ -204,13 +192,13 @@ public class PreviewInvoicePageCtrl implements Initializable {
      * Handles the save receipt button.
      */
     public void handleSaveReceipt() {
-        Receipt receipt = null;
+        Receipt receipt;
 
         try {
             receipt = new Receipt(invoice);
             receipt = serverUtils.addReceipt(receipt);
         } catch (Exception e) {
-            showSuccessReceipt();
+            clientUtils.showSuccessReceipt();
             return;
         }
 
@@ -235,18 +223,6 @@ public class PreviewInvoicePageCtrl implements Initializable {
         alert.setTitle(map.get("settings_server_error"));
         alert.setHeaderText(null);
         alert.setContentText(map.get("settings_server_error_text_receipt"));
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows a success message.
-     */
-    private void showSuccessReceipt() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(map.get("settings_success"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("settings_success_text_receipt"));
         alert.showAndWait();
     }
 }

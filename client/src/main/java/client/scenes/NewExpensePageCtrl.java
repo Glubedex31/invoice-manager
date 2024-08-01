@@ -102,7 +102,7 @@ public class NewExpensePageCtrl implements Initializable {
      */
     public void handleSave() {
         if(isBlankOrInvalid()) {
-            showError();
+            clientUtils.showError();
             return;
         }
 
@@ -127,7 +127,7 @@ public class NewExpensePageCtrl implements Initializable {
         payment.setMeaning(meaningField.getText());
         payment.setBank(bankCheckbox.isSelected());
 
-        Payment res = null;
+        Payment res;
 
         try {
             res = serverUtils.updatePayment(payment);
@@ -154,7 +154,7 @@ public class NewExpensePageCtrl implements Initializable {
         String meaning = meaningField.getText();
         boolean isBank = bankCheckbox.isSelected();
 
-        Payment res = null;
+        Payment res;
 
         try {
             Payment payment = new Payment(meaning, number, isBank);
@@ -189,18 +189,6 @@ public class NewExpensePageCtrl implements Initializable {
      */
     private boolean hasDigits() {
         return numberField.getText().matches("[0-9]+");
-    }
-
-    /**
-     * Shows an error message.
-     */
-    private void showError() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(map.get("validation_error"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("validation_error_text"));
-        alert.showAndWait();
     }
 
     /**

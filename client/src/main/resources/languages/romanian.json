@@ -66,6 +66,7 @@
   "preview_delete_success": "Stergere cu succes",
   "preview_delete_success_text": "Factura a fost stearsa cu succes.",
   "preview_delete_success_text_expense": "Cheltuiala a fost stearsa cu succes.",
+  "preview_delete_success_text_receipt": "Chitanta a fost stearsa cu succes.",
   "preview_delete_error": "Eroare la stergere",
   "preview_delete_error_text": "A aparut o eroare in timpul incercarii de a sterge factura. Va rugam sa incercati mai tarziu.",
   "preview_delete_error_text_expense": "A aparut o eroare in timpul incercarii de a sterge cheltuiala. Va rugam sa incercati mai tarziu.",
