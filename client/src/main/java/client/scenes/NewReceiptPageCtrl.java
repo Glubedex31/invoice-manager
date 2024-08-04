@@ -205,8 +205,10 @@ public class NewReceiptPageCtrl implements Initializable {
         else {
             clientUtils.showSuccessReceipt();
             serverUtils.generateReceiptPdf(res1.getId());
-            invoice.setHasBeenPaid(true);
-            serverUtils.updateInvoice(receipt.getInvoice());
+            if(invoice.isHasBeenPaid() == false) {
+                invoice.setHasBeenPaid(true);
+                serverUtils.updateInvoice(invoice);
+            }
             mainCtrl.showPreviewReceiptPage(res1);
         }
     }
@@ -237,8 +239,9 @@ public class NewReceiptPageCtrl implements Initializable {
             res2 = serverUtils.addClient(client);
 
             Receipt newReceipt = new Receipt(number, series, amount, date,
-                client, provider, invoice);
+                res2, provider, invoice);
             res1 = serverUtils.addReceipt(newReceipt);
+
         } catch (Exception e) {
             clientUtils.showServerError();
             return;

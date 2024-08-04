@@ -198,7 +198,7 @@ public class PreviewInvoicePageCtrl implements Initializable {
             receipt = new Receipt(invoice);
             receipt = serverUtils.addReceipt(receipt);
         } catch (Exception e) {
-            clientUtils.showSuccessReceipt();
+            showServerErrorReceipt();
             return;
         }
 
@@ -206,10 +206,10 @@ public class PreviewInvoicePageCtrl implements Initializable {
             showServerErrorReceipt();
         }
         else {
-            showSuccess();
+            clientUtils.showSuccessReceipt();
             serverUtils.generateReceiptPdf(receipt.getId());
             invoice.setHasBeenPaid(true);
-            serverUtils.updateInvoice(receipt.getInvoice());
+            serverUtils.updateInvoice(invoice);
             mainCtrl.showPreviewReceiptPage(receipt);
         }
     }

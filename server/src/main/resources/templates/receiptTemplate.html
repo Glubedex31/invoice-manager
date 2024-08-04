@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chitanță</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .chitanta { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .sectiune { margin-bottom: 5px; }
+        .sectiune span { font-weight: bold; }
+        table { width: 100%; }
+        td { padding: 5px; }
+    </style>
+</head>
+<body>
+<div class="chitanta">
+    <table>
+        <tr>
+            <td colspan="2">Unitatea: <span> <span th:text="${receipt.provider.name}"></span></span></td>
+            <td>Seria <span> <span th:text="${receipt.series}"></span></span></td>
+            <td>Nr. <span> <span th:text="${receipt.number}"></span></span></td>
+        </tr>
+        <tr>
+            <td colspan="2">Nr. ord. reg. com./an: <span><span th:text="${receipt.provider.number}"></span></span></td>
+        </tr>
+        <tr>
+            <td colspan="2">C.I.F. <span><span th:text="${receipt.provider.cif}"></span></span></td>
+        </tr>
+        <tr>
+            <td colspan="4">Sediul: <span><span th:text="${receipt.provider.address}"></span></span></td>
+        </tr>
+        <tr>
+            <!--<td colspan="2">Județul: <span>__________</span></td>-->
+            <!--<td colspan="2">Capital social: <span>__________</span></td>-->
+        </tr>
+    </table>
+    <div class="header">
+        <h2>CHITANȚĂ Nr. <span th:text="${receipt.number}"></span></h2>
+    </div>
+    <div class="sectiune">
+        <span>Data:</span> <span th:text="${receipt.date}"></span>
+    </div>
+    <div class="sectiune">
+        <span>Am primit de la:</span> <span th:text="${receipt.client.name}"></span>
+    </div>
+    <div class="sectiune">
+        <span>Adresa:</span> <span th:text="${receipt.client.address}"></span>
+    </div>
+    <div class="sectiune">
+        <span>Suma de:</span> <span th:text="${receipt.amount}"></span> adică _______________________________
+    </div>
+    <div class="sectiune">
+        <span>reprezentând:</span>  cval onorariu avocat
+    </div>
+    <div class="sectiune">
+        <span>Casier,</span> ___________________
+    </div>
+</div>
+</body>
+</html>
