@@ -66,6 +66,7 @@
   "preview_delete_success": "Delete success",
   "preview_delete_success_text": "Invoice deleted successfully.",
   "preview_delete_success_text_expense": "Expense deleted successfully.",
+  "preview_delete_success_text_receipt": "Receipt deleted successfully.",
   "preview_delete_error": "Delete error",
   "preview_delete_error_text": "An error occurred while trying to delete the invoice. Please try again later.",
   "preview_delete_error_text_expense": "An error occurred while trying to delete the expense. Please try again later.",

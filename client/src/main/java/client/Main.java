@@ -46,11 +46,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Main.INJECTOR.injectMembers(this);
-
         if (configUtils == null) {
             throw new RuntimeException("Dependency injection failed for configReader.");
         }
-
         configUtils.initialize();
         var startPage = FXML.load(StartPageCtrl.class, "scenes", "StartPage.fxml");
         var settingsPage = FXML.load(SettingsPageCtrl.class, "scenes", "SettingsPage.fxml");
@@ -72,7 +70,8 @@ public class Main extends Application {
             "scenes", "NewReceiptPage.fxml");
         var previewReceiptPage = FXML.load(PreviewReceiptPageCtrl.class,
             "scenes", "PreviewReceiptPage.fxml");
-
+        var receiptSummaryPage = FXML.load(ReceiptSummaryPageCtrl.class,
+            "scenes", "ReceiptSummaryPage.fxml");
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
         mainCtrl.initialize(primaryStage,
             startPage,
@@ -86,8 +85,8 @@ public class Main extends Application {
             expenseSummaryPage,
             previewExpensePage,
             newReceiptPage,
-            previewReceiptPage);
-
+            previewReceiptPage,
+            receiptSummaryPage);
         primaryStage.setOnCloseRequest(e -> {
             configUtils.writeLanguage(clientUtils.getLanguage());
         });

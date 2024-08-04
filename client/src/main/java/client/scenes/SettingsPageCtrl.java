@@ -122,10 +122,10 @@ public class SettingsPageCtrl implements Initializable {
      */
     public void handleSave() {
         if(isBlankOrInvalid()) {
-            showError();
+            clientUtils.showError();
             return;
         }
-        Provider res = null;
+        Provider res;
         if(hasProvider) {
             Provider provider = serverUtils.getProviders().get(0);
             provider.setName(nameField.getText());
@@ -169,18 +169,6 @@ public class SettingsPageCtrl implements Initializable {
         alert.setTitle(map.get("settings_success"));
         alert.setHeaderText(null);
         alert.setContentText(map.get("settings_success_text"));
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows an error message.
-     */
-    private void showError() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(map.get("validation_error"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("validation_error_text"));
         alert.showAndWait();
     }
 

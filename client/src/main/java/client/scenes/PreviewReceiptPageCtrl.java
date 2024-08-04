@@ -117,6 +117,8 @@ public class PreviewReceiptPageCtrl implements Initializable {
 
         if (result) {
             try {
+                receipt.getInvoice().setHasBeenPaid(false);
+                serverUtils.updateInvoice(receipt.getInvoice());
                 serverUtils.deleteReceipt(receipt.getId());
 
                 Path path = Paths.get("src/main/resources/receipts/receipt_"
@@ -160,7 +162,7 @@ public class PreviewReceiptPageCtrl implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(map.get("preview_delete_success"));
         alert.setHeaderText(null);
-        alert.setContentText(map.get("preview_delete_success_text"));
+        alert.setContentText(map.get("preview_delete_success_text_receipt"));
         alert.showAndWait();
     }
 

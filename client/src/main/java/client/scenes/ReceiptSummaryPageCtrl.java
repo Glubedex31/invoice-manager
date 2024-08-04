@@ -3,7 +3,7 @@ package client.scenes;
 import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
-import commons.Invoice;
+import commons.Receipt;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class InvoiceSummaryPageCtrl implements Initializable {
+public class ReceiptSummaryPageCtrl implements Initializable {
     private final MainCtrl mainCtrl;
     private final ClientUtils clientUtils;
     private final ServerUtils serverUtils;
@@ -28,8 +28,7 @@ public class InvoiceSummaryPageCtrl implements Initializable {
     @FXML
     private Button backButton;
     @FXML
-    private ListView<Invoice> listView;
-    private boolean isOnReceiptMenu;
+    private ListView<Receipt> listView;
 
     /**
      * Constructor.
@@ -38,7 +37,7 @@ public class InvoiceSummaryPageCtrl implements Initializable {
      * @param serverUtils The server utils
      */
     @Inject
-    public InvoiceSummaryPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils,
+    public ReceiptSummaryPageCtrl(MainCtrl mainCtrl, ClientUtils clientUtils,
                                   ServerUtils serverUtils) {
         this.mainCtrl = mainCtrl;
         this.clientUtils = clientUtils;
@@ -57,27 +56,25 @@ public class InvoiceSummaryPageCtrl implements Initializable {
 
     /**
      * Refresh the controller.
-     * @param isOnReceiptMenu Whether the user is on the receipt menu
      */
-    public void refresh(boolean isOnReceiptMenu) {
-        this.isOnReceiptMenu = isOnReceiptMenu;
+    public void refresh() {
         updateLanguage();
-        loadInvoices();
+        loadReceipts();
         setupEventListView();
     }
 
     /**
-     * This loads the invoices from the server.
+     * This loads the receipts from the server.
      */
-    private void loadInvoices() {
-        Task<List<Invoice>> task = new Task<>() {
+    private void loadReceipts() {
+        Task<List<Receipt>> task = new Task<>() {
             @Override
-            protected List<Invoice> call() throws Exception {
-                return serverUtils.getInvoices();
+            protected List<Receipt> call() throws Exception {
+                return serverUtils.getReceipts();
             }
         };
 
-        task.setOnSucceeded(invoice ->
+        task.setOnSucceeded(receipt ->
             listView.setItems(FXCollections.observableArrayList(task.getValue())));
         task.setOnFailed(invoice -> {
             Throwable cause = task.getException();
@@ -93,20 +90,16 @@ public class InvoiceSummaryPageCtrl implements Initializable {
      * Set up the event list view.
      */
     private void setupEventListView() {
-        listView.setCellFactory(lv -> new ListCell<Invoice>() {
+        listView.setCellFactory(lv -> new ListCell<Receipt>() {
             @Override
-            protected void updateItem(Invoice invoice, boolean empty) {
-                super.updateItem(invoice, empty);
-                setText(empty || invoice == null ? null :
-                    clientUtils.getLanguageMap().get("invoice") + " " +
-                        clientUtils.getLanguageMap().get("nr") + " " + invoice.getNumber());
+            protected void updateItem(Receipt receipt, boolean empty) {
+                super.updateItem(receipt, empty);
+                setText(empty || receipt == null ? null :
+                    clientUtils.getLanguageMap().get("receipt") + " " +
+                        clientUtils.getLanguageMap().get("nr") + " " + receipt.getNumber());
                 setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getClickCount() == 2 && !empty) {
-                        if(!isOnReceiptMenu) {
-                            mainCtrl.showPreviewInvoicePage(invoice);
-                        } else {
-                            mainCtrl.showNewReceiptPage(invoice);
-                        }
+                        mainCtrl.showPreviewReceiptPage(receipt);
                     }
                 });
             }
@@ -138,12 +131,8 @@ public class InvoiceSummaryPageCtrl implements Initializable {
      */
     public void updateLanguage() {
         Map<String, String> map = clientUtils.getLanguageMap();
-
-        if(isOnReceiptMenu) {
-            title.setText(map.get("choose_invoice"));
-        } else {
-            title.setText(map.get("invoice_summary"));
-        }
+        
+        title.setText(map.get("receipt_summary"));
         backButton.setText(map.get("settings_back"));
     }
 }

@@ -11,6 +11,7 @@ public class Receipt extends Document{
 
     @OneToOne
     private Invoice invoice;
+    private String amountInWords;
 
     /**
      * Constructor for the Receipt class.
@@ -26,12 +27,23 @@ public class Receipt extends Document{
                    Client client, Provider provider, Invoice invoice) {
         super(number, series, amount, date, client, provider);
         this.invoice = invoice;
+        this.amountInWords = getAmountInWords();
     }
 
     /**
      * Constructor for the Receipt class.
      */
     public Receipt() {
+    }
+
+    /**
+     * Constructor for the Receipt class.
+     * @param invoice The invoice for the receipt.
+     */
+    public Receipt(Invoice invoice) {
+        super(invoice.getNumber(), invoice.getSeries(), invoice.getAmount(),
+            invoice.getDate(), invoice.getClient(), invoice.getProvider());
+        this.invoice = invoice;
     }
 
     /**
@@ -81,5 +93,31 @@ public class Receipt extends Document{
         return "Receipt{" +
             "invoice=" + invoice +
             '}';
+    }
+
+    /** !!! This method must be tested thoroughly !!!
+     * Get the amount of the receipt in words.
+     * @return The amount of the receipt in words.
+     */
+    public String getAmountInWords() {
+        NumberToWordsConverter numberToWordsConverter = new NumberToWordsConverter();
+        return numberToWordsConverter.convert((int) super.getAmount());
+    }
+
+    /**
+     * Set the amount of the receipt in words.
+     */
+    public void setAmountInWords() {
+        this.amountInWords = getAmountInWords();
+    }
+
+    /**
+     * Set the amount of the document.
+     * @param amount The amount of the document.
+     */
+    @Override
+    public void setAmount(long amount) {
+        super.setAmount(amount);
+        setAmountInWords();
     }
 }

@@ -112,7 +112,7 @@ public class IncomeMenuPageCtrl implements Initializable {
      * Handles the receipt summary button.
      */
     public void handleReceiptSummary() {
-
+        mainCtrl.showReceiptSummaryPage();
     }
 
     /**

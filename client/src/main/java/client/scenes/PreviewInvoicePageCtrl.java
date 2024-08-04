@@ -4,6 +4,7 @@ import client.utils.ClientUtils;
 import client.utils.ServerUtils;
 import com.google.inject.Inject;
 import commons.Invoice;
+import commons.Receipt;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -25,8 +26,6 @@ public class PreviewInvoicePageCtrl implements Initializable {
     private Invoice invoice;
     private final ServerUtils serverUtils;
 
-//    @FXML
-//    private Button backButton;
     @FXML
     private Button saveButton;
     @FXML
@@ -115,15 +114,6 @@ public class PreviewInvoicePageCtrl implements Initializable {
         mainCtrl.showIncomeMenuPage();
     }
 
-// A back button doesn't really make sense on this page
-
-//    /**
-//     * Handles the back button.
-//     */
-//    public void handleBack() {
-//        mainCtrl.showNewInvoicePage();
-//    }
-
     /**
      * Handles the delete button.
      */
@@ -202,6 +192,37 @@ public class PreviewInvoicePageCtrl implements Initializable {
      * Handles the save receipt button.
      */
     public void handleSaveReceipt() {
-        //TODO: Implement save receipt
+        Receipt receipt;
+
+        try {
+            receipt = new Receipt(invoice);
+            receipt = serverUtils.addReceipt(receipt);
+        } catch (Exception e) {
+            showServerErrorReceipt();
+            return;
+        }
+
+        if(receipt == null) {
+            showServerErrorReceipt();
+        }
+        else {
+            clientUtils.showSuccessReceipt();
+            serverUtils.generateReceiptPdf(receipt.getId());
+            invoice.setHasBeenPaid(true);
+            serverUtils.updateInvoice(invoice);
+            mainCtrl.showPreviewReceiptPage(receipt);
+        }
+    }
+
+    /**
+     * Shows a server error message.
+     */
+    private void showServerErrorReceipt() {
+        Map<String, String> map = clientUtils.getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(map.get("settings_server_error"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("settings_server_error_text_receipt"));
+        alert.showAndWait();
     }
 }

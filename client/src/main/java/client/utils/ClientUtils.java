@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import commons.Client;
+import commons.Document;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -94,5 +98,117 @@ public class ClientUtils {
 
         scrollPane.setContent(box);
         document.close();
+    }
+
+    /**
+     * Shows a server error message.
+     */
+    public void showError() {
+        Map<String, String> map = getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(map.get("validation_error"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("validation_error_text"));
+        alert.showAndWait();
+    }
+
+    /**
+     * Sets the client fields.
+     * @param document the document
+     * @param nameField the name field
+     * @param cifField the CIF field
+     * @param addressField the address field
+     * @param accountField the account field
+     * @param bankField the bank field
+     * @param clientNumberField the client number field
+     */
+    public void setClientFields(Document document, TextField nameField, TextField cifField,
+                                TextField addressField, TextField accountField,
+                                TextField bankField, TextField clientNumberField) {
+        nameField.setText(document.getClient().getName());
+        cifField.setText(document.getClient().getCif());
+        addressField.setText(document.getClient().getAddress());
+        accountField.setText(document.getClient().getAccount());
+        bankField.setText(document.getClient().getBank());
+        clientNumberField.setText(document.getClient().getNumber());
+    }
+
+    /**
+     * Sets the prompt text for the client fields.
+     * @param map the language map
+     * @param nameField the name field
+     * @param cifField the CIF field
+     * @param addressField the address field
+     * @param accountField the account field
+     * @param bankField the bank field
+     * @param clientNumberField the client number field
+     */
+    public void setPromptClientFields(Map<String, String> map, TextField nameField,
+                                      TextField cifField, TextField addressField,
+                                      TextField accountField, TextField bankField,
+                                      TextField clientNumberField) {
+        nameField.setPromptText(map.get("client_name"));
+        cifField.setPromptText(map.get("client_cif"));
+        addressField.setPromptText(map.get("client_address"));
+        accountField.setPromptText(map.get("client_account"));
+        bankField.setPromptText(map.get("client_bank"));
+        clientNumberField.setPromptText(map.get("client_number"));
+    }
+
+    /**
+     * Sets the client details.
+     * @param client the client
+     * @param nameField the name field
+     * @param cifField the CIF field
+     * @param addressField the address field
+     * @param accountField the account field
+     * @param bankField the bank field
+     * @param clientNumberField the client number field
+     */
+    public void setClientDetails(Client client, TextField nameField, TextField cifField,
+                                 TextField addressField, TextField accountField,
+                                 TextField bankField, TextField clientNumberField) {
+        client.setName(nameField.getText());
+        client.setCif(cifField.getText());
+        client.setAddress(addressField.getText());
+        client.setAccount(accountField.getText());
+        client.setBank(bankField.getText());
+        client.setNumber(clientNumberField.getText());
+    }
+
+    /**
+     * Shows a digits error message.
+     */
+    public void showDigitsError() {
+        Map<String, String> map = getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(map.get("digits_error"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("digits_error_text"));
+        alert.showAndWait();
+    }
+
+    /**
+     * Shows a server error message.
+     */
+    public void showServerError() {
+        Map<String, String> map = getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(map.get("settings_server_error"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("settings_server_error_text_receipt"));
+        alert.showAndWait();
+    }
+
+    /**
+     * Shows a success message.
+     */
+    public void showSuccessReceipt() {
+        Map<String, String> map = getLanguageMap();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(map.get("settings_success"));
+        alert.setHeaderText(null);
+        alert.setContentText(map.get("settings_success_text_receipt"));
+        alert.showAndWait();
     }
 }

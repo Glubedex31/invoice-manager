@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConfigUtils {
     private final String configFile = "config.properties";
-    private final String configPath = "src/main/resources/" + configFile;
     private Properties properties = new Properties();
 
     /**
@@ -46,11 +45,8 @@ public class ConfigUtils {
      * @return language stored in config file, english if none found
      */
     public String getLanguage() {
-        return switch (properties.getProperty("language")) {
-            case "English" -> "English";
-            case "Romanian" -> "Romanian";
-            default -> "English";
-        };
+        return (properties.getProperty("language").equals("Romanian"))
+            ? "Romanian" : "English";
     }
 
     /**
@@ -60,6 +56,7 @@ public class ConfigUtils {
      */
     public void writeLanguage(String language) {
         properties.setProperty("language", language);
+        String configPath = "src/main/resources/" + configFile;
         try (OutputStream os = new FileOutputStream(configPath)) {
             properties.store(os, null);
         } catch (IOException e) {

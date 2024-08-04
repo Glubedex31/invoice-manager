@@ -118,7 +118,7 @@ public class ExpenseSummaryPageCtrl implements Initializable {
         task.setOnFailed(expense -> {
             Throwable cause = task.getException();
             cause.printStackTrace();
-            showAlert("summary_load_error_title", clientUtils.getLanguageMap()
+            showAlert(clientUtils.getLanguageMap()
                 .get("summary_load_error_text"));
             System.out.println(cause.getMessage());
         });
@@ -147,12 +147,12 @@ public class ExpenseSummaryPageCtrl implements Initializable {
 
     /**
      * Show an alert.
-     * @param title The title
+     *
      * @param message The message
      */
-    private void showAlert(String title, String message) {
+    private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(title);
+        alert.setTitle("summary_load_error_title");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

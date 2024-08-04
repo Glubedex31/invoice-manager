@@ -99,12 +99,8 @@ public class NewInvoicePageCtrl implements Initializable {
             amountField.setText(String.valueOf(invoice.getAmount()));
             dateField.setValue(invoice.getDate());
             meaningField.setText(invoice.getMeaning());
-            nameField.setText(invoice.getClient().getName());
-            cifField.setText(invoice.getClient().getCif());
-            addressField.setText(invoice.getClient().getAddress());
-            accountField.setText(invoice.getClient().getAccount());
-            bankField.setText(invoice.getClient().getBank());
-            clientNumberField.setText(invoice.getClient().getNumber());
+            clientUtils.setClientFields(invoice, nameField, cifField, addressField,
+                accountField, bankField, clientNumberField);
         }
     }
 
@@ -124,12 +120,8 @@ public class NewInvoicePageCtrl implements Initializable {
         amountField.setPromptText(map.get("invoice_amount"));
         dateField.setPromptText(map.get("invoice_date"));
         meaningField.setPromptText(map.get("invoice_meaning"));
-        nameField.setPromptText(map.get("client_name"));
-        cifField.setPromptText(map.get("client_cif"));
-        addressField.setPromptText(map.get("client_address"));
-        accountField.setPromptText(map.get("client_account"));
-        bankField.setPromptText(map.get("client_bank"));
-        clientNumberField.setPromptText(map.get("client_number"));
+        clientUtils.setPromptClientFields(map, nameField, cifField, addressField,
+            accountField, bankField, clientNumberField);
     }
 
     /**
@@ -137,12 +129,12 @@ public class NewInvoicePageCtrl implements Initializable {
      */
     public void handleSave() {
         if(isBlankOrInvalid()) {
-            showError();
+            clientUtils.showError();
             return;
         }
 
         if(!hasDigits()) {
-            showDigitsError();
+            clientUtils.showDigitsError();
             return;
         }
 
@@ -164,15 +156,11 @@ public class NewInvoicePageCtrl implements Initializable {
         invoice.setDate(dateField.getValue());
         invoice.setMeaning(meaningField.getText());
 
-        invoice.getClient().setName(nameField.getText());
-        invoice.getClient().setCif(cifField.getText());
-        invoice.getClient().setAddress(addressField.getText());
-        invoice.getClient().setAccount(accountField.getText());
-        invoice.getClient().setBank(bankField.getText());
-        invoice.getClient().setNumber(clientNumberField.getText());
+        clientUtils.setClientDetails(invoice.getClient(), nameField, cifField,
+            addressField, accountField, bankField, clientNumberField);
 
-        Invoice res1 = null;
-        Client res2 = null;
+        Invoice res1;
+        Client res2;
 
         try {
             res2 = serverUtils.updateClient(invoice.getClient());
@@ -192,6 +180,8 @@ public class NewInvoicePageCtrl implements Initializable {
         }
     }
 
+
+
     /**
      * Handles the save button for the creation case.
      */
@@ -210,8 +200,8 @@ public class NewInvoicePageCtrl implements Initializable {
         String bank = bankField.getText();
         String  clientNumber = clientNumberField.getText();
 
-        Invoice res1 = null;
-        Client res2 = null;
+        Invoice res1;
+        Client res2;
 
         try {
             Client client = new Client(name, cif, address, account, bank, clientNumber);
@@ -260,30 +250,6 @@ public class NewInvoicePageCtrl implements Initializable {
     private boolean hasDigits() {
         return numberField.getText().matches("[0-9]+") && seriesField.getText().matches("[0-9]+") &&
             amountField.getText().matches("[0-9]+");
-    }
-
-    /**
-     * Shows an error message.
-     */
-    private void showError() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(map.get("validation_error"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("validation_error_text"));
-        alert.showAndWait();
-    }
-
-    /**
-     * Shows an error message.
-     */
-    private void showDigitsError() {
-        Map<String, String> map = clientUtils.getLanguageMap();
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle(map.get("digits_error"));
-        alert.setHeaderText(null);
-        alert.setContentText(map.get("digits_error_text"));
-        alert.showAndWait();
     }
 
     /**

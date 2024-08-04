@@ -107,7 +107,7 @@ public class ServerUtils {
      */
     public String generateReceiptPdf(long id) {
         return ClientBuilder.newClient(new ClientConfig())
-            .target(SERVER).path("api/receipt/generate-pdf/" + id)
+            .target(SERVER).path("api/receipts/generate-pdf/" + id)
             .request(APPLICATION_JSON)
             .accept(APPLICATION_JSON)
             .get(String.class);
